@@ -1,9 +1,9 @@
 //
 //  GameScene.mm
-//  ___PROJECTNAME___
+//  TossThePanda
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
+//  Created by Manpreet on 6/2/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "GameScene.h"
