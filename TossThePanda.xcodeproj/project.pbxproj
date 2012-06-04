@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F8BFC6E1579870600291C60 /* panda3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8BFC6D1579870600291C60 /* panda3.png */; };
-		3F8BFC70157988C200291C60 /* bamboo_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8BFC6F157988C200291C60 /* bamboo_floor.png */; };
+		3F79C908157D7B4A0043F22B /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */; };
+		3F79C909157D7B4A0043F22B /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */; };
+		3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90A157D7B5F0043F22B /* bamboo_floor.png */; };
+		3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90B157D7B5F0043F22B /* bamboo.png */; };
+		3F79C910157D7B5F0043F22B /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90C157D7B5F0043F22B /* bg.png */; };
+		3F79C911157D7B5F0043F22B /* panda3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90D157D7B5F0043F22B /* panda3.png */; };
 		3F8BFC7E157AAE5600291C60 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F8BFC7D157AAE5600291C60 /* Player.mm */; };
-		3FC73B24157C2DCA001E354E /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC73B23157C2DCA001E354E /* bg.png */; };
-		3FC73B27157C2DD5001E354E /* bamboo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC73B26157C2DD5001E354E /* bamboo.png */; };
 		3FE462E91579108A00F3A904 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462E81579108A00F3A904 /* QuartzCore.framework */; };
 		3FE462EB1579108A00F3A904 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462EA1579108A00F3A904 /* OpenGLES.framework */; };
 		3FE462ED1579108A00F3A904 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462EC1579108A00F3A904 /* OpenAL.framework */; };
@@ -165,8 +167,6 @@
 		3FE464D5157910B000F3A904 /* CCSpringSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464CD157910B000F3A904 /* CCSpringSprite.mm */; };
 		3FE464D6157910B000F3A904 /* CCWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464CF157910B000F3A904 /* CCWorldLayer.mm */; };
 		3FE464D7157910B000F3A904 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464D1157910B000F3A904 /* GLES-Render.mm */; };
-		3FE464DC1579149C00F3A904 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464D81579149C00F3A904 /* NSString+MD5Addition.m */; };
-		3FE464DD1579149C00F3A904 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464D91579149C00F3A904 /* UIDevice+IdentifierAddition.m */; };
 		3FE464F31579177700F3A904 /* FontLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464E91579177700F3A904 /* FontLabel.m */; };
 		3FE464F41579177700F3A904 /* FontLabelStringDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464EB1579177700F3A904 /* FontLabelStringDrawing.m */; };
 		3FE464F51579177700F3A904 /* FontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464ED1579177700F3A904 /* FontManager.m */; };
@@ -175,12 +175,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F8BFC6D1579870600291C60 /* panda3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda3.png; sourceTree = "<group>"; };
-		3F8BFC6F157988C200291C60 /* bamboo_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bamboo_floor.png; sourceTree = "<group>"; };
+		3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5Addition.m"; path = "libs/cocos2d/NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+IdentifierAddition.m"; path = "libs/cocos2d/UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
+		3F79C906157D7B4A0043F22B /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5Addition.h"; path = "libs/cocos2d/NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		3F79C907157D7B4A0043F22B /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+IdentifierAddition.h"; path = "libs/cocos2d/UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		3F79C90A157D7B5F0043F22B /* bamboo_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo_floor.png; path = Resources/bamboo_floor.png; sourceTree = "<group>"; };
+		3F79C90B157D7B5F0043F22B /* bamboo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo.png; path = Resources/bamboo.png; sourceTree = "<group>"; };
+		3F79C90C157D7B5F0043F22B /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Resources/bg.png; sourceTree = "<group>"; };
+		3F79C90D157D7B5F0043F22B /* panda3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = panda3.png; path = Resources/panda3.png; sourceTree = "<group>"; };
 		3F8BFC79157AA99100291C60 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		3F8BFC7D157AAE5600291C60 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
-		3FC73B23157C2DCA001E354E /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
-		3FC73B26157C2DD5001E354E /* bamboo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bamboo.png; sourceTree = "<group>"; };
 		3FE462E41579108A00F3A904 /* TossThePanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TossThePanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE462E81579108A00F3A904 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3FE462EA1579108A00F3A904 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -489,10 +493,6 @@
 		3FE464CF157910B000F3A904 /* CCWorldLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCWorldLayer.mm; sourceTree = "<group>"; };
 		3FE464D0157910B000F3A904 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		3FE464D1157910B000F3A904 /* GLES-Render.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
-		3FE464D81579149C00F3A904 /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
-		3FE464D91579149C00F3A904 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
-		3FE464DA1579149C00F3A904 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
-		3FE464DB1579149C00F3A904 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		3FE464E81579177700F3A904 /* FontLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontLabel.h; sourceTree = "<group>"; };
 		3FE464E91579177700F3A904 /* FontLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontLabel.m; sourceTree = "<group>"; };
 		3FE464EA1579177700F3A904 /* FontLabelStringDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontLabelStringDrawing.h; sourceTree = "<group>"; };
@@ -585,10 +585,10 @@
 		3FE462F91579108B00F3A904 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3FC73B26157C2DD5001E354E /* bamboo.png */,
-				3FC73B23157C2DCA001E354E /* bg.png */,
-				3F8BFC6F157988C200291C60 /* bamboo_floor.png */,
-				3F8BFC6D1579870600291C60 /* panda3.png */,
+				3F79C90A157D7B5F0043F22B /* bamboo_floor.png */,
+				3F79C90B157D7B5F0043F22B /* bamboo.png */,
+				3F79C90C157D7B5F0043F22B /* bg.png */,
+				3F79C90D157D7B5F0043F22B /* panda3.png */,
 				3FE462FA1579108B00F3A904 /* Default.png */,
 				3FE462FC1579108B00F3A904 /* fps_images.png */,
 				3FE462FE1579108B00F3A904 /* Icon-72.png */,
@@ -606,10 +606,10 @@
 		3FE4630D1579108B00F3A904 /* cocos2d */ = {
 			isa = PBXGroup;
 			children = (
-				3FE464D81579149C00F3A904 /* NSString+MD5Addition.m */,
-				3FE464D91579149C00F3A904 /* UIDevice+IdentifierAddition.m */,
-				3FE464DA1579149C00F3A904 /* NSString+MD5Addition.h */,
-				3FE464DB1579149C00F3A904 /* UIDevice+IdentifierAddition.h */,
+				3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */,
+				3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */,
+				3F79C906157D7B4A0043F22B /* NSString+MD5Addition.h */,
+				3F79C907157D7B4A0043F22B /* UIDevice+IdentifierAddition.h */,
 				3FE4630E1579108B00F3A904 /* CCAction.h */,
 				3FE4630F1579108B00F3A904 /* CCAction.m */,
 				3FE463111579108B00F3A904 /* CCActionCamera.h */,
@@ -1015,10 +1015,10 @@
 				3FE463071579108B00F3A904 /* Icon.png in Resources */,
 				3FE463091579108B00F3A904 /* Icon@2x.png in Resources */,
 				3FE4630C1579108B00F3A904 /* iTunesArtwork in Resources */,
-				3F8BFC6E1579870600291C60 /* panda3.png in Resources */,
-				3F8BFC70157988C200291C60 /* bamboo_floor.png in Resources */,
-				3FC73B24157C2DCA001E354E /* bg.png in Resources */,
-				3FC73B27157C2DD5001E354E /* bamboo.png in Resources */,
+				3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */,
+				3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */,
+				3F79C910157D7B5F0043F22B /* bg.png in Resources */,
+				3F79C911157D7B5F0043F22B /* panda3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,14 +1165,14 @@
 				3FE464D5157910B000F3A904 /* CCSpringSprite.mm in Sources */,
 				3FE464D6157910B000F3A904 /* CCWorldLayer.mm in Sources */,
 				3FE464D7157910B000F3A904 /* GLES-Render.mm in Sources */,
-				3FE464DC1579149C00F3A904 /* NSString+MD5Addition.m in Sources */,
-				3FE464DD1579149C00F3A904 /* UIDevice+IdentifierAddition.m in Sources */,
 				3FE464F31579177700F3A904 /* FontLabel.m in Sources */,
 				3FE464F41579177700F3A904 /* FontLabelStringDrawing.m in Sources */,
 				3FE464F51579177700F3A904 /* FontManager.m in Sources */,
 				3FE464F61579177700F3A904 /* ZAttributedString.m in Sources */,
 				3FE464F71579177700F3A904 /* ZFont.m in Sources */,
 				3F8BFC7E157AAE5600291C60 /* Player.mm in Sources */,
+				3F79C908157D7B4A0043F22B /* NSString+MD5Addition.m in Sources */,
+				3F79C909157D7B4A0043F22B /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
