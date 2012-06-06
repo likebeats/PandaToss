@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F56598D157FF34700743B1A /* bamboo_floor-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F56598B157FF34700743B1A /* bamboo_floor-hd.png */; };
+		3F56598E157FF34700743B1A /* panda3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F56598C157FF34700743B1A /* panda3-hd.png */; };
+		3F565991157FF41700743B1A /* bamboo-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F565990157FF41700743B1A /* bamboo-hd.png */; };
 		3F79C908157D7B4A0043F22B /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */; };
 		3F79C909157D7B4A0043F22B /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */; };
 		3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90A157D7B5F0043F22B /* bamboo_floor.png */; };
@@ -175,6 +178,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F56598B157FF34700743B1A /* bamboo_floor-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bamboo_floor-hd.png"; path = "Resources/bamboo_floor-hd.png"; sourceTree = "<group>"; };
+		3F56598C157FF34700743B1A /* panda3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "panda3-hd.png"; path = "Resources/panda3-hd.png"; sourceTree = "<group>"; };
+		3F565990157FF41700743B1A /* bamboo-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bamboo-hd.png"; path = "Resources/bamboo-hd.png"; sourceTree = "<group>"; };
 		3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5Addition.m"; path = "libs/cocos2d/NSString+MD5Addition.m"; sourceTree = "<group>"; };
 		3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+IdentifierAddition.m"; path = "libs/cocos2d/UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		3F79C906157D7B4A0043F22B /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5Addition.h"; path = "libs/cocos2d/NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -585,6 +591,9 @@
 		3FE462F91579108B00F3A904 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3F565990157FF41700743B1A /* bamboo-hd.png */,
+				3F56598B157FF34700743B1A /* bamboo_floor-hd.png */,
+				3F56598C157FF34700743B1A /* panda3-hd.png */,
 				3F79C90A157D7B5F0043F22B /* bamboo_floor.png */,
 				3F79C90B157D7B5F0043F22B /* bamboo.png */,
 				3F79C90C157D7B5F0043F22B /* bg.png */,
@@ -1019,6 +1028,9 @@
 				3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */,
 				3F79C910157D7B5F0043F22B /* bg.png in Resources */,
 				3F79C911157D7B5F0043F22B /* panda3.png in Resources */,
+				3F56598D157FF34700743B1A /* bamboo_floor-hd.png in Resources */,
+				3F56598E157FF34700743B1A /* panda3-hd.png in Resources */,
+				3F565991157FF41700743B1A /* bamboo-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

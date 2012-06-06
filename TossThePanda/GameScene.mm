@@ -31,7 +31,7 @@ enum {
 		self.isAccelerometerEnabled = YES;
         
 		screenSize = [CCDirector sharedDirector].winSize;
-		CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
+        screenSizeInPixels = [CCDirector sharedDirector].winSizeInPixels;
 		
 		self.gravity = ccp(0.0f, -10.0f);
 		
@@ -52,45 +52,6 @@ enum {
 
 - (void)initScene
 {
-    CCLabelTTF *powerLabel = [CCLabelTTF labelWithString:@"Power:" fontName:@"Chalkduster" fontSize: 14];
-    [powerLabel setAnchorPoint:CGPointZero];
-    [powerLabel setPosition:ccp(10,screenSize.height-20)];
-    [self addChild:powerLabel];
-    
-    powerValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
-    [powerValue setAnchorPoint:CGPointZero];
-    [powerValue setPosition:ccp(85,screenSize.height-20)];
-    [self addChild:powerValue];
-    
-    CCLabelTTF *distanceLabel = [CCLabelTTF labelWithString:@"Distance:" fontName:@"Chalkduster" fontSize: 14];
-    [distanceLabel setAnchorPoint:CGPointZero];
-    [distanceLabel setPosition:ccp(10,screenSize.height-40)];
-    [self addChild:distanceLabel];
-    
-    distanceValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
-    [distanceValue setAnchorPoint:CGPointZero];
-    [distanceValue setPosition:ccp(85,screenSize.height-40)];
-    [self addChild:distanceValue];
-    
-    CCLabelTTF *heightLabel = [CCLabelTTF labelWithString:@"Height:" fontName:@"Chalkduster" fontSize: 14];
-    [heightLabel setAnchorPoint:CGPointZero];
-    [heightLabel setPosition:ccp(10,screenSize.height-60)];
-    [self addChild:heightLabel];
-    
-    heightValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
-    [heightValue setAnchorPoint:CGPointZero];
-    [heightValue setPosition:ccp(85,screenSize.height-60)];
-    [self addChild:heightValue];
-    
-    CCLabelTTF *velocityLabel = [CCLabelTTF labelWithString:@"Velocity:" fontName:@"Chalkduster" fontSize: 14];
-    [velocityLabel setAnchorPoint:CGPointZero];
-    [velocityLabel setPosition:ccp(10,screenSize.height-80)];
-    [self addChild:velocityLabel];
-    
-    velocityValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
-    [velocityValue setAnchorPoint:CGPointZero];
-    [velocityValue setPosition:ccp(85,screenSize.height-80)];
-    [self addChild:velocityValue];
     
     floorGroup = [CCNode node];
     bgGroup = [CCNode node];
@@ -134,6 +95,58 @@ enum {
     [self addChild:bgGroup];
     [self addChild:floorGroup];
     
+    
+    
+    CCLabelTTF *powerLabel = [CCLabelTTF labelWithString:@"Power:" fontName:@"Chalkduster" fontSize: 14];
+    [powerLabel setAnchorPoint:CGPointZero];
+    [powerLabel setPosition:ccp(10,screenSize.height-20)];
+    [powerLabel setColor:ccc3(255, 0, 255)];
+    [self addChild:powerLabel];
+    
+    powerValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
+    [powerValue setAnchorPoint:CGPointZero];
+    [powerValue setPosition:ccp(85,screenSize.height-20)];
+    [powerValue setColor:ccc3(255, 0, 255)];
+    [self addChild:powerValue];
+    
+    CCLabelTTF *distanceLabel = [CCLabelTTF labelWithString:@"Distance:" fontName:@"Chalkduster" fontSize: 14];
+    [distanceLabel setAnchorPoint:CGPointZero];
+    [distanceLabel setPosition:ccp(10,screenSize.height-40)];
+    [distanceLabel setColor:ccc3(255, 0, 255)];
+    [self addChild:distanceLabel];
+    
+    distanceValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
+    [distanceValue setAnchorPoint:CGPointZero];
+    [distanceValue setPosition:ccp(85,screenSize.height-40)];
+    [distanceValue setColor:ccc3(255, 0, 255)];
+    [self addChild:distanceValue];
+    
+    CCLabelTTF *heightLabel = [CCLabelTTF labelWithString:@"Height:" fontName:@"Chalkduster" fontSize: 14];
+    [heightLabel setAnchorPoint:CGPointZero];
+    [heightLabel setPosition:ccp(10,screenSize.height-60)];
+    [heightLabel setColor:ccc3(255, 0, 255)];
+    [self addChild:heightLabel];
+    
+    heightValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
+    [heightValue setAnchorPoint:CGPointZero];
+    [heightValue setPosition:ccp(85,screenSize.height-60)];
+    [heightValue setColor:ccc3(255, 0, 255)];
+    [self addChild:heightValue];
+    
+    CCLabelTTF *velocityLabel = [CCLabelTTF labelWithString:@"Velocity:" fontName:@"Chalkduster" fontSize: 14];
+    [velocityLabel setAnchorPoint:CGPointZero];
+    [velocityLabel setPosition:ccp(10,screenSize.height-80)];
+    [velocityLabel setColor:ccc3(255, 0, 255)];
+    [self addChild:velocityLabel];
+    
+    velocityValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
+    [velocityValue setAnchorPoint:CGPointZero];
+    [velocityValue setPosition:ccp(85,screenSize.height-80)];
+    [velocityValue setColor:ccc3(255, 0, 255)];
+    [self addChild:velocityValue];
+    
+    
+    
     // enable the frame scheduler
     [self schedule:@selector(enterFrame:)];
 }
@@ -153,6 +166,7 @@ enum {
     [self repositionFloors];
     [self repositionThemeBgs];
     
+    // Check when player stops/slows player down at low velocity
     CCBodySprite *floor = [floors objectAtIndex:0];
     [player checkIfPlayerStops:floor.position.y];
 }
@@ -209,7 +223,7 @@ enum {
         int themeBgLocalx = themeBg.nodeToWorldTransform.tx;
         int playerLocalx = player.nodeToWorldTransform.tx;
         
-        if((playerLocalx - themeBgLocalx) >= 1000) {
+        if((playerLocalx - themeBgLocalx) >= (screenSizeInPixels.width*2)+100) {
             int newX = nextThemeBg.position.x+themeBg.contentSize.width;
             [themeBg setPosition:ccp(newX,themeBg.position.y)];
         }

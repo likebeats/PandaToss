@@ -83,7 +83,7 @@ enum {
         //NSLog(@"vx:%f vy:%f deltaX:%i deltaY:%i %f", vx, vy, deltaX, deltaY, (self.position.y - floorY));
         if (((self.position.y - floorY) < 49) && (abs(vy) < 10)) {
             self.velocity = ccp(vx - (vx*0.01), vy);
-            if (deltaX <= 1 && deltaY < 1 && (abs(vx) < 5) && (abs(vy) < 3)) {
+            if (deltaX <= 1 && deltaY < 1 && (abs(vx) < 5) && (abs(vy) < 2)) {
                 self.isFlying = NO;
             }
         }

@@ -14,6 +14,7 @@
 @interface GameScene : CCWorldLayer
 {
     CGSize screenSize;
+    CGSize screenSizeInPixels;
     
     NSMutableArray *bgs;
     NSMutableArray *themeBgs;
