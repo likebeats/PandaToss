@@ -72,14 +72,24 @@ enum {
     [distanceValue setPosition:ccp(85,screenSize.height-40)];
     [self addChild:distanceValue];
     
+    CCLabelTTF *heightLabel = [CCLabelTTF labelWithString:@"Height:" fontName:@"Chalkduster" fontSize: 14];
+    [heightLabel setAnchorPoint:CGPointZero];
+    [heightLabel setPosition:ccp(10,screenSize.height-60)];
+    [self addChild:heightLabel];
+    
+    heightValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
+    [heightValue setAnchorPoint:CGPointZero];
+    [heightValue setPosition:ccp(85,screenSize.height-60)];
+    [self addChild:heightValue];
+    
     CCLabelTTF *velocityLabel = [CCLabelTTF labelWithString:@"Velocity:" fontName:@"Chalkduster" fontSize: 14];
     [velocityLabel setAnchorPoint:CGPointZero];
-    [velocityLabel setPosition:ccp(10,screenSize.height-60)];
+    [velocityLabel setPosition:ccp(10,screenSize.height-80)];
     [self addChild:velocityLabel];
     
     velocityValue = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize: 14];
     [velocityValue setAnchorPoint:CGPointZero];
-    [velocityValue setPosition:ccp(85,screenSize.height-60)];
+    [velocityValue setPosition:ccp(85,screenSize.height-80)];
     [self addChild:velocityValue];
     
     floorGroup = [CCNode node];
@@ -110,7 +120,7 @@ enum {
         floor.collidesWithType = kBoxCollisionType | kWallCollisionType;
         floor.position = ccp(floor.contentSize.width*i, floor.contentSize.height/2);
         floor.density = 1.0f;
-        floor.friction = 100.0f;
+        floor.friction = 1.0f;
         floor.bounce = 0.5f;
         [floor addBoxWithName:@"floor"];
         [floors addObject:floor];
@@ -133,6 +143,22 @@ enum {
     NSString *distance = [NSString stringWithFormat:@"%.0f", player.position.x - [player getStartingPoint].x];
     [distanceValue setString:distance];
     
+    NSString *velocity = [NSString stringWithFormat:@"%.0f, %.0f", player.velocity.x, player.velocity.y];
+    [velocityValue setString:velocity];
+    
+    NSString *height = [NSString stringWithFormat:@"%.0f", player.position.y];
+    [heightValue setString:height];
+    
+    [self moveCamera];
+    [self repositionFloors];
+    [self repositionThemeBgs];
+    
+    CCBodySprite *floor = [floors objectAtIndex:0];
+    [player checkIfPlayerStops:floor.position.y];
+}
+
+- (void)moveCamera
+{
     int newX, newY;
     
     // move floorGroup
@@ -152,12 +178,6 @@ enum {
         newY = bgGroup.position.y;
     }
     [bgGroup setPosition:ccp( newX, newY )];
-    
-    [self repositionFloors];
-    [self repositionThemeBgs];
-    
-    CCBodySprite *floor = [floors objectAtIndex:0];
-    [player checkifPlayerStops:floor.position.y];
 }
 
 - (void)repositionFloors
@@ -186,9 +206,10 @@ enum {
         CCBodySprite *themeBg = [themeBgs objectAtIndex:i];
         CCBodySprite *nextThemeBg = [themeBgs objectAtIndex:next];
         
-        int playerx = player.position.x - floorGroup.position.x;
-        NSLog(@"%i",playerx);
-        if((playerx - themeBg.position.x) >= themeBg.contentSize.width) {
+        int themeBgLocalx = themeBg.nodeToWorldTransform.tx;
+        int playerLocalx = player.nodeToWorldTransform.tx;
+        
+        if((playerLocalx - themeBgLocalx) >= 1000) {
             int newX = nextThemeBg.position.x+themeBg.contentSize.width;
             [themeBg setPosition:ccp(newX,themeBg.position.y)];
         }
@@ -210,11 +231,18 @@ enum {
     NSLog(@"touch ended");
     //UITouch* touch = [touches anyObject];
     //CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    b2Vec2 force(100 / PTM_RATIO, 100 / PTM_RATIO);
+    
+    float power = 10;
+    float angle = CC_DEGREES_TO_RADIANS(45);
+    float xForce = cos(angle) * power;
+    float yForce = sin(angle) * power;
+    b2Vec2 force(xForce, yForce);
     b2Vec2 b2Location(player.position.x / PTM_RATIO, player.position.y / PTM_RATIO);
-    player.body->ApplyLinearImpulse(force, b2Location);
-    [player rotateMe];
+    player.body->ApplyLinearImpulse(force, player.body->GetPosition());
+    
+    if (!player.isRotating) [player rotateMe];
     player.isFlying = YES;
+    player.isLaunched = YES;
 }
 
 - (void) dealloc

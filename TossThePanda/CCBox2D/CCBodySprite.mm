@@ -439,6 +439,18 @@
 	}
 }
 
+-(CGPoint) velocity
+{
+    CGPoint vel = CGPointMake(0,0);
+    
+    // if body exists
+	if (_body)
+	{
+        vel = CGPointMake(_body->GetLinearVelocity().x, _body->GetLinearVelocity().y);
+	}
+    return vel;
+}
+
 -(void) setVelocity:(CGPoint)newVelocity
 {
 	_velocity = newVelocity;
@@ -447,7 +459,7 @@
 	if (_body)
 	{
 		// set the body velocity
-		_body->SetLinearVelocity(b2Vec2(_velocity.x / PTM_RATIO, _velocity.y / PTM_RATIO));
+		_body->SetLinearVelocity(b2Vec2(_velocity.x, _velocity.y));
 	}
 }
 

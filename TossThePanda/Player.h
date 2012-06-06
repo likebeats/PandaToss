@@ -19,17 +19,20 @@
     int x0;
     int y0;
     
+    BOOL _isRotating;
     BOOL _isFlying;
-    
+    BOOL _isLaunched;
 }
 
+@property (nonatomic) BOOL isRotating;
 @property (nonatomic) BOOL isFlying;
+@property (nonatomic) BOOL isLaunched;
 
 + (id) initWithFileName: (NSString *)file;
 
 - (CGPoint) getStartingPoint;
 - (void) rotateMe;
 - (void) stopRotatingMe;
-- (void) checkifPlayerStops:(int)floorY;
+- (void) checkIfPlayerStops:(int)floorY;
 
 @end

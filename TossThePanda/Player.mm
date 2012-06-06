@@ -15,7 +15,9 @@ enum {
 
 @implementation Player
 
+@synthesize isRotating = _isRotating;
 @synthesize isFlying = _isFlying;
+@synthesize isLaunched = _isLaunched;
 
 - (CGRect) rectInPixels
 {
@@ -31,27 +33,20 @@ enum {
 -(id) init
 {
 	if( (self=[super init]) ) {
+        x0 = 0;
+        y0 = 0;
+        
         startingPoint = ccp(300,100);
         self.physicsType = kDynamic;
         self.collisionType = kBoxCollisionType;
         self.collidesWithType = kBoxCollisionType | kWallCollisionType;
         self.position = startingPoint;
-        self.density = 1.0f;
+        self.density = 3.0f;
         self.friction = 1.0f;
-        self.bounce = 0.0f;
+        self.bounce = 0.70f;
         [self addCircleWithName:@"player" ofRadius:10.0f];
     }
     return self;
-}
-
-- (void) rotateMe
-{
-    rotationAction = [self runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:2.0 angle:360]]];
-}
-
-- (void) stopRotatingMe
-{
-    [rotationAction stop];
 }
 
 - (CGPoint) getStartingPoint
@@ -59,7 +54,20 @@ enum {
     return startingPoint;
 }
 
-- (void) checkifPlayerStops:(int)floorY
+- (void) rotateMe
+{
+    rotationAction = [self runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:0.02 angle:5]]];
+    self.isRotating = YES;
+}
+
+- (void) stopRotatingMe
+{
+    self.isRotating = NO;
+    [rotationAction stop];
+    rotationAction = nil;
+}
+
+- (void) checkIfPlayerStops:(int)floorY
 {
     if (x0 != 0 && x0 != 0) {
         deltaX = abs(self.position.x - x0);
@@ -67,28 +75,27 @@ enum {
     }
     x0 = self.position.x;
     y0 = self.position.y;
-    
-    int vx = self.velocity.x;
-    int vy = self.velocity.y;
+
+    float vx = self.velocity.x;
+    float vy = self.velocity.y;
     
     if (self.isFlying == YES) {
-        NSLog(@"%i %i %f",deltaX, deltaY,(self.position.y - floorY));
-        
-        if (deltaX <= 2 && deltaY < 0.2 && (self.position.y - floorY) < 49) {
-            NSLog(@"1");
-            self.isFlying = NO;
-        }
-        if ((floorY - self.position.y < -40) && (abs(self.velocity.y) < 10)) {
-            NSLog(@"2");
-            self.velocity = ccp(vx - (vx*0.01), 0);
-        }
-        if (vx < 35) {
-            //NSLog(@"3");
-            self.velocity = ccp(vx+35, vy*0.9);
+        //NSLog(@"vx:%f vy:%f deltaX:%i deltaY:%i %f", vx, vy, deltaX, deltaY, (self.position.y - floorY));
+        if (((self.position.y - floorY) < 49) && (abs(vy) < 10)) {
+            self.velocity = ccp(vx - (vx*0.01), vy);
+            if (deltaX <= 1 && deltaY < 1 && (abs(vx) < 5) && (abs(vy) < 3)) {
+                self.isFlying = NO;
+            }
         }
     } else {
-        NSLog(@"4");
-        self.velocity = ccp(vx*0.9, vy);
+        if (self.isLaunched == YES) {
+            if (abs(vx) < 0.4 && abs(vy) < 0.4) {
+                if (self.isRotating) [self stopRotatingMe];
+                self.velocity = ccp(0,0);
+            } else {
+                self.velocity = ccp(vx*0.9, vy);
+            }
+        }
     }
 }
 

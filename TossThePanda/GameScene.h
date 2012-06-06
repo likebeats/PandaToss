@@ -25,12 +25,14 @@
     
     CCLabelTTF *powerValue;
     CCLabelTTF *distanceValue;
+    CCLabelTTF *heightValue;
     CCLabelTTF *velocityValue;
 }
 
 +(CCScene *) scene;
 
 -(void)initScene;
+-(void)moveCamera;
 -(void)repositionFloors;
 -(void)repositionThemeBgs;
 
