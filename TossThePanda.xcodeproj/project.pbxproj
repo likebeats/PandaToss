@@ -14,7 +14,6 @@
 		3F79C909157D7B4A0043F22B /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */; };
 		3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90A157D7B5F0043F22B /* bamboo_floor.png */; };
 		3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90B157D7B5F0043F22B /* bamboo.png */; };
-		3F79C910157D7B5F0043F22B /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90C157D7B5F0043F22B /* bg.png */; };
 		3F79C911157D7B5F0043F22B /* panda3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90D157D7B5F0043F22B /* panda3.png */; };
 		3F8BFC7E157AAE5600291C60 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F8BFC7D157AAE5600291C60 /* Player.mm */; };
 		3FE462E91579108A00F3A904 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462E81579108A00F3A904 /* QuartzCore.framework */; };
@@ -187,7 +186,6 @@
 		3F79C907157D7B4A0043F22B /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+IdentifierAddition.h"; path = "libs/cocos2d/UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		3F79C90A157D7B5F0043F22B /* bamboo_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo_floor.png; path = Resources/bamboo_floor.png; sourceTree = "<group>"; };
 		3F79C90B157D7B5F0043F22B /* bamboo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo.png; path = Resources/bamboo.png; sourceTree = "<group>"; };
-		3F79C90C157D7B5F0043F22B /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Resources/bg.png; sourceTree = "<group>"; };
 		3F79C90D157D7B5F0043F22B /* panda3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = panda3.png; path = Resources/panda3.png; sourceTree = "<group>"; };
 		3F8BFC79157AA99100291C60 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		3F8BFC7D157AAE5600291C60 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
@@ -596,7 +594,6 @@
 				3F56598C157FF34700743B1A /* panda3-hd.png */,
 				3F79C90A157D7B5F0043F22B /* bamboo_floor.png */,
 				3F79C90B157D7B5F0043F22B /* bamboo.png */,
-				3F79C90C157D7B5F0043F22B /* bg.png */,
 				3F79C90D157D7B5F0043F22B /* panda3.png */,
 				3FE462FA1579108B00F3A904 /* Default.png */,
 				3FE462FC1579108B00F3A904 /* fps_images.png */,
@@ -1026,7 +1023,6 @@
 				3FE4630C1579108B00F3A904 /* iTunesArtwork in Resources */,
 				3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */,
 				3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */,
-				3F79C910157D7B5F0043F22B /* bg.png in Resources */,
 				3F79C911157D7B5F0043F22B /* panda3.png in Resources */,
 				3F56598D157FF34700743B1A /* bamboo_floor-hd.png in Resources */,
 				3F56598E157FF34700743B1A /* panda3-hd.png in Resources */,

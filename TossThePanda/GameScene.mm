@@ -52,16 +52,39 @@ enum {
 
 - (void)initScene
 {
-    
     floorGroup = [CCNode node];
     bgGroup = [CCNode node];
     
-    bgs = [[NSMutableArray alloc] initWithCapacity:2];
-    for (int i = 0; i < 2; i++) {
-        CCSprite *bg = [CCSprite spriteWithFile:@"bg.png"];
-        bg.position = ccp(0,0);
-        //[bgs addObject:bg];
-        //[bgGroup addChild:bg];
+    gradientsGroups = [[NSMutableArray alloc] initWithCapacity:2];
+    for (int j = 0; j < 2; j++) {
+        ccColor4B startColor;
+        ccColor4B fadeTo;
+        int lowerGradientY = 0;
+        int lowerGradientHeight = 0;
+        CCNode *gradientGroup = [CCNode node];
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                startColor = ccc4(255,255,153,255);
+                fadeTo = ccc4(253,62,62,255);
+            } else if (i == 1) {
+                startColor = ccc4(253,62,62,255);
+                fadeTo = ccc4(50,19,121,255);
+            } else if (i == 2) {
+                startColor = ccc4(50,19,121,255);
+                fadeTo = ccc4(0,0,0,255);
+            }
+            CCLayerGradient *bgGradient = [CCLayerGradient layerWithColor:startColor fadingTo:fadeTo alongVector:ccp(0,1)];
+            [bgGradient setContentSize:CGSizeMake(700, 3000+(1000*i))];
+            [bgGradient setPosition:ccp(0,lowerGradientY+lowerGradientHeight)];
+            
+            lowerGradientY = bgGradient.position.y;
+            lowerGradientHeight = bgGradient.contentSize.height;
+            
+            [gradientGroup addChild:bgGradient];
+        }
+        [gradientGroup setPosition:ccp(0+(700*j),0)];
+        [gradientsGroups addObject:gradientGroup];
+        [bgGroup addChild:gradientGroup z:-1];
     }
     
     themeBgs = [[NSMutableArray alloc] initWithCapacity:2];
@@ -164,6 +187,7 @@ enum {
     
     [self moveCamera];
     [self repositionFloors];
+    [self repositionGradientBgs];
     [self repositionThemeBgs];
     
     // Check when player stops/slows player down at low velocity
@@ -204,9 +228,28 @@ enum {
         CCBodySprite *floor = [floors objectAtIndex:i];
         CCBodySprite *nextfloor = [floors objectAtIndex:next];
         
-        if((player.position.x - floor.position.x) >= 480) {
+        if ((player.position.x - floor.position.x) >= 480) {
             int newX = nextfloor.position.x+floor.contentSize.width;
             [floor setPosition:ccp(newX,floor.position.y)];
+        }
+    }
+}
+
+- (void)repositionGradientBgs
+{
+    int next;
+    for (int i = 0; i < 2; i++) {
+        if (i == 0) next = 1;
+        if (i == 1) next = 0;
+        CCNode *group = [gradientsGroups objectAtIndex:i];
+        CCNode *nextGroup = [gradientsGroups objectAtIndex:next];
+        
+        int groupLocalx = group.nodeToWorldTransform.tx;
+        int playerLocalx = player.nodeToWorldTransform.tx;
+        
+        if((playerLocalx - groupLocalx) >= (screenSizeInPixels.width*2)+100) {
+            int newX = nextGroup.position.x+700;
+            [group setPosition:ccp(newX,group.position.y)];
         }
     }
 }

@@ -16,7 +16,7 @@
     CGSize screenSize;
     CGSize screenSizeInPixels;
     
-    NSMutableArray *bgs;
+    NSMutableArray *gradientsGroups;
     NSMutableArray *themeBgs;
     NSMutableArray *floors;
     
@@ -35,6 +35,7 @@
 -(void)initScene;
 -(void)moveCamera;
 -(void)repositionFloors;
+-(void)repositionGradientBgs;
 -(void)repositionThemeBgs;
 
 @end
