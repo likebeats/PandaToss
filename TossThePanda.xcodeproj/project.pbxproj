@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F56598D157FF34700743B1A /* bamboo_floor-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F56598B157FF34700743B1A /* bamboo_floor-hd.png */; };
+		3F16FE5E1588F3D800A759CE /* wood_cannon_body.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE5C1588F3D800A759CE /* wood_cannon_body.png */; };
+		3F16FE5F1588F3D800A759CE /* wood_cannon_mouth.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F16FE5D1588F3D800A759CE /* wood_cannon_mouth.png */; };
+		3F16FE631588F55C00A759CE /* Cannon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F16FE621588F55C00A759CE /* Cannon.mm */; };
 		3F56598E157FF34700743B1A /* panda3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F56598C157FF34700743B1A /* panda3-hd.png */; };
-		3F565991157FF41700743B1A /* bamboo-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F565990157FF41700743B1A /* bamboo-hd.png */; };
 		3F79C908157D7B4A0043F22B /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */; };
 		3F79C909157D7B4A0043F22B /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */; };
-		3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90A157D7B5F0043F22B /* bamboo_floor.png */; };
-		3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90B157D7B5F0043F22B /* bamboo.png */; };
 		3F79C911157D7B5F0043F22B /* panda3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79C90D157D7B5F0043F22B /* panda3.png */; };
 		3F8BFC7E157AAE5600291C60 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F8BFC7D157AAE5600291C60 /* Player.mm */; };
 		3FE462E91579108A00F3A904 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462E81579108A00F3A904 /* QuartzCore.framework */; };
@@ -174,18 +173,32 @@
 		3FE464F51579177700F3A904 /* FontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464ED1579177700F3A904 /* FontManager.m */; };
 		3FE464F61579177700F3A904 /* ZAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464EF1579177700F3A904 /* ZAttributedString.m */; };
 		3FE464F71579177700F3A904 /* ZFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE464F21579177700F3A904 /* ZFont.m */; };
+		3FF5BA9515877D1700DAB589 /* bamboo_floor-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8915877D1700DAB589 /* bamboo_floor-hd.png */; };
+		3FF5BA9615877D1700DAB589 /* bamboo_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8A15877D1700DAB589 /* bamboo_floor.png */; };
+		3FF5BA9715877D1700DAB589 /* bamboo-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8B15877D1700DAB589 /* bamboo-hd.png */; };
+		3FF5BA9815877D1700DAB589 /* bamboo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8C15877D1700DAB589 /* bamboo.png */; };
+		3FF5BA9915877D1700DAB589 /* desert_floor-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8D15877D1700DAB589 /* desert_floor-hd.png */; };
+		3FF5BA9A15877D1700DAB589 /* desert_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8E15877D1700DAB589 /* desert_floor.png */; };
+		3FF5BA9B15877D1700DAB589 /* desert-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA8F15877D1700DAB589 /* desert-hd.png */; };
+		3FF5BA9C15877D1700DAB589 /* desert.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA9015877D1700DAB589 /* desert.png */; };
+		3FF5BA9D15877D1700DAB589 /* forest_floor-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA9115877D1700DAB589 /* forest_floor-hd.png */; };
+		3FF5BA9E15877D1700DAB589 /* forest_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA9215877D1700DAB589 /* forest_floor.png */; };
+		3FF5BA9F15877D1700DAB589 /* forest-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA9315877D1700DAB589 /* forest-hd.png */; };
+		3FF5BAA015877D1700DAB589 /* forest.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BA9415877D1700DAB589 /* forest.png */; };
+		3FF5BAA21587BB5700DAB589 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5BAA11587BB5700DAB589 /* fire.png */; };
+		3FF5BAA71587C4AA00DAB589 /* Animation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5BAA61587C4AA00DAB589 /* Animation.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F56598B157FF34700743B1A /* bamboo_floor-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bamboo_floor-hd.png"; path = "Resources/bamboo_floor-hd.png"; sourceTree = "<group>"; };
+		3F16FE5C1588F3D800A759CE /* wood_cannon_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wood_cannon_body.png; path = Resources/cannons/wood_cannon_body.png; sourceTree = "<group>"; };
+		3F16FE5D1588F3D800A759CE /* wood_cannon_mouth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wood_cannon_mouth.png; path = Resources/cannons/wood_cannon_mouth.png; sourceTree = "<group>"; };
+		3F16FE611588F55C00A759CE /* Cannon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cannon.h; sourceTree = "<group>"; };
+		3F16FE621588F55C00A759CE /* Cannon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cannon.mm; sourceTree = "<group>"; };
 		3F56598C157FF34700743B1A /* panda3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "panda3-hd.png"; path = "Resources/panda3-hd.png"; sourceTree = "<group>"; };
-		3F565990157FF41700743B1A /* bamboo-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bamboo-hd.png"; path = "Resources/bamboo-hd.png"; sourceTree = "<group>"; };
 		3F79C904157D7B4A0043F22B /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5Addition.m"; path = "libs/cocos2d/NSString+MD5Addition.m"; sourceTree = "<group>"; };
 		3F79C905157D7B4A0043F22B /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+IdentifierAddition.m"; path = "libs/cocos2d/UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		3F79C906157D7B4A0043F22B /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5Addition.h"; path = "libs/cocos2d/NSString+MD5Addition.h"; sourceTree = "<group>"; };
 		3F79C907157D7B4A0043F22B /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+IdentifierAddition.h"; path = "libs/cocos2d/UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
-		3F79C90A157D7B5F0043F22B /* bamboo_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo_floor.png; path = Resources/bamboo_floor.png; sourceTree = "<group>"; };
-		3F79C90B157D7B5F0043F22B /* bamboo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo.png; path = Resources/bamboo.png; sourceTree = "<group>"; };
 		3F79C90D157D7B5F0043F22B /* panda3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = panda3.png; path = Resources/panda3.png; sourceTree = "<group>"; };
 		3F8BFC79157AA99100291C60 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		3F8BFC7D157AAE5600291C60 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
@@ -508,6 +521,21 @@
 		3FE464F01579177700F3A904 /* ZAttributedStringPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAttributedStringPrivate.h; sourceTree = "<group>"; };
 		3FE464F11579177700F3A904 /* ZFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFont.h; sourceTree = "<group>"; };
 		3FE464F21579177700F3A904 /* ZFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFont.m; sourceTree = "<group>"; };
+		3FF5BA8915877D1700DAB589 /* bamboo_floor-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bamboo_floor-hd.png"; path = "Resources/themes/bamboo_floor-hd.png"; sourceTree = "<group>"; };
+		3FF5BA8A15877D1700DAB589 /* bamboo_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo_floor.png; path = Resources/themes/bamboo_floor.png; sourceTree = "<group>"; };
+		3FF5BA8B15877D1700DAB589 /* bamboo-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bamboo-hd.png"; path = "Resources/themes/bamboo-hd.png"; sourceTree = "<group>"; };
+		3FF5BA8C15877D1700DAB589 /* bamboo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bamboo.png; path = Resources/themes/bamboo.png; sourceTree = "<group>"; };
+		3FF5BA8D15877D1700DAB589 /* desert_floor-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "desert_floor-hd.png"; path = "Resources/themes/desert_floor-hd.png"; sourceTree = "<group>"; };
+		3FF5BA8E15877D1700DAB589 /* desert_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = desert_floor.png; path = Resources/themes/desert_floor.png; sourceTree = "<group>"; };
+		3FF5BA8F15877D1700DAB589 /* desert-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "desert-hd.png"; path = "Resources/themes/desert-hd.png"; sourceTree = "<group>"; };
+		3FF5BA9015877D1700DAB589 /* desert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = desert.png; path = Resources/themes/desert.png; sourceTree = "<group>"; };
+		3FF5BA9115877D1700DAB589 /* forest_floor-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forest_floor-hd.png"; path = "Resources/themes/forest_floor-hd.png"; sourceTree = "<group>"; };
+		3FF5BA9215877D1700DAB589 /* forest_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forest_floor.png; path = Resources/themes/forest_floor.png; sourceTree = "<group>"; };
+		3FF5BA9315877D1700DAB589 /* forest-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forest-hd.png"; path = "Resources/themes/forest-hd.png"; sourceTree = "<group>"; };
+		3FF5BA9415877D1700DAB589 /* forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forest.png; path = Resources/themes/forest.png; sourceTree = "<group>"; };
+		3FF5BAA11587BB5700DAB589 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/objects/fire.png; sourceTree = "<group>"; };
+		3FF5BAA61587C4AA00DAB589 /* Animation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Animation.mm; sourceTree = "<group>"; };
+		3FF5BAA81587C4D100DAB589 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -571,6 +599,10 @@
 				3FE464B41579108F00F3A904 /* RootViewController.m */,
 				3FE464B61579108F00F3A904 /* GameScene.h */,
 				3FE464B71579108F00F3A904 /* GameScene.mm */,
+				3FF5BAA81587C4D100DAB589 /* Animation.h */,
+				3FF5BAA61587C4AA00DAB589 /* Animation.mm */,
+				3F16FE611588F55C00A759CE /* Cannon.h */,
+				3F16FE621588F55C00A759CE /* Cannon.mm */,
 				3F8BFC79157AA99100291C60 /* Player.h */,
 				3F8BFC7D157AAE5600291C60 /* Player.mm */,
 				3FE464BC1579108F00F3A904 /* GameConfig.h */,
@@ -589,11 +621,10 @@
 		3FE462F91579108B00F3A904 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3F565990157FF41700743B1A /* bamboo-hd.png */,
-				3F56598B157FF34700743B1A /* bamboo_floor-hd.png */,
+				3FF5BAAB158829A400DAB589 /* themes */,
+				3FF5BAAA1588299500DAB589 /* cannons */,
+				3FF5BAA91588297F00DAB589 /* objects */,
 				3F56598C157FF34700743B1A /* panda3-hd.png */,
-				3F79C90A157D7B5F0043F22B /* bamboo_floor.png */,
-				3F79C90B157D7B5F0043F22B /* bamboo.png */,
 				3F79C90D157D7B5F0043F22B /* panda3.png */,
 				3FE462FA1579108B00F3A904 /* Default.png */,
 				3FE462FC1579108B00F3A904 /* fps_images.png */,
@@ -962,6 +993,42 @@
 			path = FontLabel;
 			sourceTree = "<group>";
 		};
+		3FF5BAA91588297F00DAB589 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				3FF5BAA11587BB5700DAB589 /* fire.png */,
+			);
+			name = objects;
+			sourceTree = "<group>";
+		};
+		3FF5BAAA1588299500DAB589 /* cannons */ = {
+			isa = PBXGroup;
+			children = (
+				3F16FE5C1588F3D800A759CE /* wood_cannon_body.png */,
+				3F16FE5D1588F3D800A759CE /* wood_cannon_mouth.png */,
+			);
+			name = cannons;
+			sourceTree = "<group>";
+		};
+		3FF5BAAB158829A400DAB589 /* themes */ = {
+			isa = PBXGroup;
+			children = (
+				3FF5BA8915877D1700DAB589 /* bamboo_floor-hd.png */,
+				3FF5BA8A15877D1700DAB589 /* bamboo_floor.png */,
+				3FF5BA8B15877D1700DAB589 /* bamboo-hd.png */,
+				3FF5BA8C15877D1700DAB589 /* bamboo.png */,
+				3FF5BA8D15877D1700DAB589 /* desert_floor-hd.png */,
+				3FF5BA8E15877D1700DAB589 /* desert_floor.png */,
+				3FF5BA8F15877D1700DAB589 /* desert-hd.png */,
+				3FF5BA9015877D1700DAB589 /* desert.png */,
+				3FF5BA9115877D1700DAB589 /* forest_floor-hd.png */,
+				3FF5BA9215877D1700DAB589 /* forest_floor.png */,
+				3FF5BA9315877D1700DAB589 /* forest-hd.png */,
+				3FF5BA9415877D1700DAB589 /* forest.png */,
+			);
+			name = themes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1021,12 +1088,23 @@
 				3FE463071579108B00F3A904 /* Icon.png in Resources */,
 				3FE463091579108B00F3A904 /* Icon@2x.png in Resources */,
 				3FE4630C1579108B00F3A904 /* iTunesArtwork in Resources */,
-				3F79C90E157D7B5F0043F22B /* bamboo_floor.png in Resources */,
-				3F79C90F157D7B5F0043F22B /* bamboo.png in Resources */,
 				3F79C911157D7B5F0043F22B /* panda3.png in Resources */,
-				3F56598D157FF34700743B1A /* bamboo_floor-hd.png in Resources */,
 				3F56598E157FF34700743B1A /* panda3-hd.png in Resources */,
-				3F565991157FF41700743B1A /* bamboo-hd.png in Resources */,
+				3FF5BA9515877D1700DAB589 /* bamboo_floor-hd.png in Resources */,
+				3FF5BA9615877D1700DAB589 /* bamboo_floor.png in Resources */,
+				3FF5BA9715877D1700DAB589 /* bamboo-hd.png in Resources */,
+				3FF5BA9815877D1700DAB589 /* bamboo.png in Resources */,
+				3FF5BA9915877D1700DAB589 /* desert_floor-hd.png in Resources */,
+				3FF5BA9A15877D1700DAB589 /* desert_floor.png in Resources */,
+				3FF5BA9B15877D1700DAB589 /* desert-hd.png in Resources */,
+				3FF5BA9C15877D1700DAB589 /* desert.png in Resources */,
+				3FF5BA9D15877D1700DAB589 /* forest_floor-hd.png in Resources */,
+				3FF5BA9E15877D1700DAB589 /* forest_floor.png in Resources */,
+				3FF5BA9F15877D1700DAB589 /* forest-hd.png in Resources */,
+				3FF5BAA015877D1700DAB589 /* forest.png in Resources */,
+				3FF5BAA21587BB5700DAB589 /* fire.png in Resources */,
+				3F16FE5E1588F3D800A759CE /* wood_cannon_body.png in Resources */,
+				3F16FE5F1588F3D800A759CE /* wood_cannon_mouth.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1181,6 +1259,8 @@
 				3F8BFC7E157AAE5600291C60 /* Player.mm in Sources */,
 				3F79C908157D7B4A0043F22B /* NSString+MD5Addition.m in Sources */,
 				3F79C909157D7B4A0043F22B /* UIDevice+IdentifierAddition.m in Sources */,
+				3FF5BAA71587C4AA00DAB589 /* Animation.mm in Sources */,
+				3F16FE631588F55C00A759CE /* Cannon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

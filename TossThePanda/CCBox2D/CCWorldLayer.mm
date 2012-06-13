@@ -165,7 +165,7 @@ void ContactConduit::PostSolve(b2Contact* contact, const b2ContactImpulse* impul
     if(_debugDrawFlags && !_debugDraw)
     {
 		_debugDraw = new GLESDebugDraw( PTM_RATIO );
-		_world->SetDebugDraw(_debugDraw);        
+		_world->SetDebugDraw(_debugDraw);
 		_debugDraw->SetFlags(_debugDrawFlags);
     }
     else if(!_debugDrawFlags && _debugDraw)

@@ -9,7 +9,9 @@
 #import "cocos2d.h"
 #import "CCBox2D.h"
 
+#import "Animation.h"
 #import "Player.h"
+#import "Cannon.h"
 
 @interface GameScene : CCWorldLayer
 {
@@ -21,8 +23,11 @@
     NSMutableArray *floors;
     
     Player *player;
+    Cannon *cannon;
     CCNode *floorGroup;
     CCNode *bgGroup;
+    
+    float fallLine;
     
     CCLabelTTF *powerValue;
     CCLabelTTF *distanceValue;
@@ -32,10 +37,15 @@
 
 +(CCScene *) scene;
 
--(void)initScene;
--(void)moveCamera;
--(void)repositionFloors;
--(void)repositionGradientBgs;
--(void)repositionThemeBgs;
+- (void) initScene;
+- (void) createLabels;
+- (void) enterFrame: (ccTime)dt;
+- (void) moveCamera;
+- (void) repositionFloors;
+- (void) repositionGradientBgs;
+- (void) repositionThemeBgs;
+- (void) spawnGoodies;
+- (void) spawnBaddies;
+- (void) rotateCannonMouth: (CGPoint)touch;
 
 @end

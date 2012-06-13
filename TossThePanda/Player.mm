@@ -9,12 +9,14 @@
 #import "Player.h"
 
 enum {
-	kBoxCollisionType = 1,
-	kWallCollisionType = 2
+	kPlayerCollisionType = 1,
+	kFloorCollisionType = 2,
+    kFireCollisionType = 3
 };
 
 @implementation Player
 
+@synthesize startingPoint = _startingPoint;
 @synthesize isRotating = _isRotating;
 @synthesize isFlying = _isFlying;
 @synthesize isLaunched = _isLaunched;
@@ -30,28 +32,25 @@ enum {
     return [self spriteWithFile:file];
 }
 
--(id) init
+- (id) init
 {
-	if( (self=[super init]) ) {
+	if ((self=[super init])) {
+        CGSize screensize = [CCDirector sharedDirector].winSize;
         x0 = 0;
         y0 = 0;
         
-        startingPoint = ccp(300,100);
-        self.physicsType = kDynamic;
-        self.collisionType = kBoxCollisionType;
-        self.collidesWithType = kBoxCollisionType | kWallCollisionType;
-        self.position = startingPoint;
+        self.startingPoint = ccp(screensize.width/2,100);
+        self.physicsType = kStatic;
+        self.collisionType = kPlayerCollisionType;
+        self.collidesWithType = kFloorCollisionType | kFireCollisionType;
+        self.position = self.startingPoint;
         self.density = 3.0f;
         self.friction = 1.0f;
         self.bounce = 0.70f;
+        self.visible = NO;
         [self addCircleWithName:@"player" ofRadius:10.0f];
     }
     return self;
-}
-
-- (CGPoint) getStartingPoint
-{
-    return startingPoint;
 }
 
 - (void) rotateMe
@@ -81,7 +80,7 @@ enum {
     
     if (self.isFlying == YES) {
         //NSLog(@"vx:%f vy:%f deltaX:%i deltaY:%i %f", vx, vy, deltaX, deltaY, (self.position.y - floorY));
-        if (((self.position.y - floorY) < 49) && (abs(vy) < 10)) {
+        if (((self.position.y - floorY) < 19) && (abs(vy) < 10)) {
             self.velocity = ccp(vx - (vx*0.01), vy);
             if (deltaX <= 1 && deltaY < 1 && (abs(vx) < 5) && (abs(vy) < 2)) {
                 self.isFlying = NO;

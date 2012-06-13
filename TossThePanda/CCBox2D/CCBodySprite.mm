@@ -693,7 +693,7 @@
 	{
 		// save the vertex in world coordinates
 		CGPoint point = [vertex CGPointValue];
-		vertices[i] = b2Vec2((point.x - position_.x) / PTM_RATIO, (point.y - position_.y) / PTM_RATIO);
+		vertices[i] = b2Vec2(point.x / PTM_RATIO, point.y / PTM_RATIO);
 		
 		// next vertex
 		i++;
