@@ -42,7 +42,7 @@ enum {
 		
         [self initScene];
         
-        [self debugDrawShapes:YES];
+        [self debugDrawShapes:NO];
         [self debugDrawJoints:NO];
         [self debugDrawAABB:NO];
         [self debugDrawPair:NO];
@@ -71,7 +71,7 @@ enum {
         cannon_name = @"metal";
     } else if (cannonId == 3) {
         cannon_name = @"gold";
-    } else if (cannonId == 3) {
+    } else if (cannonId == 4) {
         cannon_name = @"tank";
     }
     
@@ -161,8 +161,11 @@ enum {
     
     fallLine = cannon.position.y;
     
-    Animation *campFire = [Animation initWithSpriteSheet:@"fire.png"];
+    Animation *campFire = [Animation initWithSpriteSheet:@"campfire.png"];
     campFire.world = self;
+    campFire.physicsType = kStatic;
+    campFire.collisionType = kFireCollisionType;
+    campFire.collidesWithType = kPlayerCollisionType;
     campFire.delayTime = 0.2;   // frame delay time
     campFire.totalFrames = 2;   // total number of frames
     campFire.sheetRows = 1;     // how many rows in sprite sheet?
@@ -170,7 +173,7 @@ enum {
     campFire.frameWidth = 80;
     campFire.frameHeight = 120;
     campFire.position = ccp(player.position.x+400, fallLine);
-    campFire.spriteBoxSize = CGSizeMake(50, 50); // size of physics box
+    campFire.spriteBoxSize = CGSizeMake(70, 50); // size of physics box
     campFire.spriteBoxName = @"campfire";
     [floorGroup addChild:campFire z:1];
     
@@ -349,12 +352,20 @@ enum {
 
 - (void)rotateCannonMouth: (CGPoint)touch
 {
-    float xx = touch.x - cannon.nodeToWorldTransform.tx;
-    float yy = touch.y - cannon.nodeToWorldTransform.ty;
+    float cannonLocalx = cannon.nodeToWorldTransform.tx;
+    float cannonLocaly = cannon.nodeToWorldTransform.ty;
+    
+    if ([[CCDirector sharedDirector] enableRetinaDisplay:YES]) {
+        cannonLocalx = cannonLocalx/2;
+        cannonLocaly = cannonLocaly/2;
+    }
+    
+    float xx = touch.x - cannonLocalx;
+    float yy = touch.y - cannonLocaly;
     float degree = CC_RADIANS_TO_DEGREES(atan2(yy,xx));
     [cannon rotateMouth:-degree];
-    int playerNewX = cannon.nodeToWorldTransform.tx + cos(CC_DEGREES_TO_RADIANS(-cannon.mouth.rotation))*30;
-    int playerNewY = cannon.nodeToWorldTransform.ty + sin(CC_DEGREES_TO_RADIANS(-cannon.mouth.rotation))*20;
+    int playerNewX = cannonLocalx + cos(CC_DEGREES_TO_RADIANS(-cannon.mouth.rotation))*cannon.playerOffset.x;
+    int playerNewY = cannonLocaly + sin(CC_DEGREES_TO_RADIANS(-cannon.mouth.rotation))*cannon.playerOffset.y;
     player.position = ccp(playerNewX,playerNewY);
 }
 
@@ -368,28 +379,39 @@ enum {
     UITouch* touch = [touches anyObject];
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     
-    [self rotateCannonMouth:touchLocation];
+    if (!player.isLaunched) [self rotateCannonMouth:touchLocation];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"touch ended");
-    //UITouch* touch = [touches anyObject];
-    //CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
+    UITouch* touch = [touches anyObject];
+    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     
-    float power = 10;
-    float angle = CC_DEGREES_TO_RADIANS(-cannon.mouth.rotation);
-    float xForce = cos(angle) * power;
-    float yForce = sin(angle) * power;
-    b2Vec2 force(xForce, yForce);
-    player.visible = YES;
-    player.physicsType = kDynamic;
-    //b2Vec2 b2Location(player.position.x / PTM_RATIO, player.position.y / PTM_RATIO);
-    player.body->ApplyLinearImpulse(force, player.body->GetPosition());
-    
-    if (!player.isRotating) [player rotateMe];
-    player.isFlying = YES;
-    player.isLaunched = YES;
+    if (!player.isLaunched) {
+        CCParticleSun *emitter = [CCParticleSun node];
+        [emitter setEmitterMode: kCCParticleModeRadius];
+        emitter.autoRemoveOnFinish = YES;
+        emitter.texture = [[CCTextureCache sharedTextureCache] addImage:@"fire.png"];
+        emitter.position = player.position;
+        emitter.duration = 1.0;
+        emitter.endRadius = 100.0;
+        [floorGroup addChild:emitter z:10];
+        
+        float power = cannon.power;
+        float angle = CC_DEGREES_TO_RADIANS(-cannon.mouth.rotation);
+        float xForce = cos(angle) * power;
+        float yForce = sin(angle) * power;
+        b2Vec2 force(xForce, yForce);
+        player.visible = YES;
+        player.physicsType = kDynamic;
+        b2Vec2 b2Location(player.nodeToWorldTransform.tx / PTM_RATIO, player.nodeToWorldTransform.ty / PTM_RATIO);
+        player.body->ApplyLinearImpulse(force, b2Location);
+        
+        if (!player.isRotating) [player rotateMe];
+        player.isFlying = YES;
+        player.isLaunched = YES;
+    }
 }
 
 - (void) dealloc

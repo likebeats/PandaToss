@@ -26,6 +26,9 @@ enum {
 @synthesize position = _position;
 @synthesize spriteBoxSize = _spriteBoxSize;
 @synthesize spriteBoxName = _spriteBoxName;
+@synthesize physicsType = _physicsType;
+@synthesize collisionType = _collisionType;
+@synthesize collidesWithType = _collidesWithType;
 
 + (id) initWithSpriteSheet: (NSString *)file
 {
@@ -34,34 +37,34 @@ enum {
 
 - (void) onEnter
 {
-    CCBodySprite *fireSprite = [CCBodySprite spriteWithTexture:self.texture rect:CGRectMake(0, 0, self.frameWidth, self.frameHeight)];    
-    fireSprite.world = self.world;
-    fireSprite.physicsType = kStatic;
-    fireSprite.collisionType = kFireCollisionType;
-    fireSprite.collidesWithType = kPlayerCollisionType;
-    fireSprite.position = self.position;
-    fireSprite.density = 0.0f;
-    fireSprite.friction = 0.0f;
-    fireSprite.bounce = 0.0f;
-    [fireSprite addBoxWithName:self.spriteBoxName ofSize:self.spriteBoxSize];
+    CCBodySprite *sprite = [CCBodySprite spriteWithTexture:self.texture rect:CGRectMake(0, 0, self.frameWidth, self.frameHeight)];    
+    sprite.world = self.world;
+    sprite.physicsType = self.physicsType;
+    sprite.collisionType = self.collisionType;
+    sprite.collidesWithType = self.collidesWithType;
+    sprite.position = self.position;
+    sprite.density = 0.0f;
+    sprite.friction = 0.0f;
+    sprite.bounce = 0.0f;
+    [sprite addBoxWithName:self.spriteBoxName ofSize:self.spriteBoxSize];
     
-    CCAnimation *fireAnimation = [CCAnimation animation];
-    [fireAnimation setDelay:self.delayTime];
+    CCAnimation *animation = [CCAnimation animation];
+    [animation setDelay:self.delayTime];
     
     int frameCount = 0;
     for (int y = 0; y < self.sheetRows; y++) {       // num of rows
         for (int x = 0; x < self.sheetColumns; x++) {   // num of columns
             //CCSpriteFrame *frame = [CCSpriteFrame frameWithTexture:danceSheet.texture rect:CGRectMake(x*85,y*121,85,121) offset:ccp(0,0)];
             CCSpriteFrame *frame = [CCSpriteFrame frameWithTexture:self.texture rect:CGRectMake(x*self.frameWidth,y*self.frameHeight,self.frameWidth,self.frameHeight)];
-            [fireAnimation addFrame:frame];
+            [animation addFrame:frame];
             
             frameCount++;
             if (frameCount == self.totalFrames) break;
         }
     }
-    CCAction *flyAction = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:fireAnimation]];
-    [fireSprite runAction:flyAction];
-    [self addChild:fireSprite z:1];
+    CCAction *action = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]];
+    [sprite runAction:action];
+    [self addChild:sprite z:1];
     
 	[super onEnter];
 }

@@ -23,6 +23,9 @@
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGSize spriteBoxSize;
 @property (nonatomic, assign) NSString *spriteBoxName;
+@property (nonatomic) PhysicsType physicsType;
+@property (nonatomic) uint16 collisionType;
+@property (nonatomic) uint16 collidesWithType;
 
 + (id) initWithSpriteSheet: (NSString *)file;
 
