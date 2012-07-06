@@ -21,6 +21,8 @@
     NSMutableArray *gradientsGroups;
     NSMutableArray *themeBgs;
     NSMutableArray *floors;
+    CCArray *goodies;
+    CCArray *baddies;
     
     Player *player;
     Cannon *cannon;
@@ -33,6 +35,11 @@
     CCLabelTTF *distanceValue;
     CCLabelTTF *heightValue;
     CCLabelTTF *velocityValue;
+    
+    int goodBall;
+    int goodTime;
+    int newGoodTime;
+    int xnew;
 }
 
 +(CCScene *) scene;
@@ -46,6 +53,7 @@
 - (void) repositionThemeBgs;
 - (void) spawnGoodies;
 - (void) spawnBaddies;
+- (void) removeOffScreenObjects;
 - (void) rotateCannonMouth: (CGPoint)touch;
 
 @end

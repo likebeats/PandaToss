@@ -9,24 +9,58 @@
 #import "cocos2d.h"
 #import "CCBox2D.h"
 
-@interface Animation : CCSpriteBatchNode {
+@interface Animation : CCNode {
+    
+    //CCSpriteBatchNode *batchnode;
+    //CCBodySprite *sprite;
     
 }
 
-@property (nonatomic, assign) CCWorldLayer *world;
-@property (nonatomic) float delayTime;
-@property (nonatomic) int totalFrames;
-@property (nonatomic) int sheetRows;
-@property (nonatomic) int sheetColumns;
-@property (nonatomic) float frameWidth;
-@property (nonatomic) float frameHeight;
-@property (nonatomic) CGPoint position;
-@property (nonatomic) CGSize spriteBoxSize;
-@property (nonatomic, assign) NSString *spriteBoxName;
-@property (nonatomic) PhysicsType physicsType;
-@property (nonatomic) uint16 collisionType;
-@property (nonatomic) uint16 collidesWithType;
+@property (nonatomic, assign) CCSpriteBatchNode *batchnode;
+@property (nonatomic, assign) CCBodySprite *sprite;
 
-+ (id) initWithSpriteSheet: (NSString *)file;
++ (id) newAnimation: (NSString *)file 
+           Position: (CGPoint)position 
+          DelayTime: (float)delayTime 
+        TotalFrames: (int)totalFrames 
+          SheetRows: (int)sheetRows 
+       SheetColumns: (int)sheetColumns 
+         FrameWidth: (float)frameWidth 
+        FrameHeight: (float)frameHeight 
+      RepeatForever: (BOOL)repeat;
+
++ (id) newAnimationWithBody: (NSString *)file 
+                   Position: (CGPoint)position 
+                  DelayTime: (float)delayTime 
+                TotalFrames: (int)totalFrames 
+                  SheetRows: (int)sheetRows 
+               SheetColumns: (int)sheetColumns 
+                 FrameWidth: (float)frameWidth 
+                FrameHeight: (float)frameHeight 
+              RepeatForever: (BOOL)repeat 
+                      World: (CCWorldLayer *)world 
+                PhysicsType: (PhysicsType)physicsType 
+                    BoxName: (NSString *)spriteBoxName 
+                    BoxSize: (CGSize)spriteBoxSize 
+              CollisionType: (uint16)collisionType 
+           CollidesWithType: (uint16)collidesWithType;
+
+- (id) initAnimation: (NSString *)file 
+            Position: (CGPoint)position
+           DelayTime: (float)delayTime
+         TotalFrames: (int)totalFrames
+           SheetRows: (int)sheetRows
+        SheetColumns: (int)sheetColumns
+          FrameWidth: (float)frameWidth
+         FrameHeight: (float)frameHeight 
+       RepeatForever: (BOOL)repeat 
+               World: (CCWorldLayer *)world 
+         PhysicsType: (PhysicsType)physicsType 
+             BoxName: (NSString *)spriteBoxName 
+             BoxSize: (CGSize)spriteBoxSize 
+       CollisionType: (uint16)collisionType 
+    CollidesWithType: (uint16)collidesWithType;
+
+- (void) removeAnimation;
 
 @end

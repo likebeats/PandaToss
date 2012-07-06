@@ -6,13 +6,8 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "Types.h"
 #import "Player.h"
-
-enum {
-	kPlayerCollisionType = 1,
-	kFloorCollisionType = 2,
-    kFireCollisionType = 3
-};
 
 @implementation Player
 
@@ -20,6 +15,8 @@ enum {
 @synthesize isRotating = _isRotating;
 @synthesize isFlying = _isFlying;
 @synthesize isLaunched = _isLaunched;
+@synthesize isOnFire = _isOnFire;
+@synthesize flame = _flame;
 
 - (CGRect) rectInPixels
 {
@@ -38,6 +35,11 @@ enum {
         CGSize screensize = [CCDirector sharedDirector].winSize;
         x0 = 0;
         y0 = 0;
+        flameTimerMax = 300.0;
+        flameTimer = 0.0;
+        isFlameFadding = NO;
+        self.isOnFire = NO;
+        self.flame = nil;
         
         self.startingPoint = ccp(screensize.width/2,100);
         self.physicsType = kStatic;
@@ -98,6 +100,54 @@ enum {
     }
 }
 
+- (void) putPlayerOnFire
+{
+    if (self.isOnFire == NO) {
+        self.flame = [Animation newAnimation:@"fire_blast.png" 
+                                    Position:self.position 
+                                   DelayTime:0.5 
+                                 TotalFrames:2 
+                                   SheetRows:2 
+                                SheetColumns:1 
+                                  FrameWidth:180 
+                                 FrameHeight:76.5 
+                               RepeatForever:YES];
+        self.flame.sprite.anchorPoint = ccp(0.8,0.5);
+        self.isOnFire = YES;
+    }
+}
+
+- (void) controlPlayerFire
+{
+    if (self.isOnFire == YES) {
+        self.flame.sprite.position = self.position;
+        self.flame.sprite.rotation = CC_RADIANS_TO_DEGREES(atan2(self.velocity.x, self.velocity.y))-90;
+        if (flameTimer < flameTimerMax and isFlameFadding == NO) {
+            flameTimer++;
+        } else {
+            isFlameFadding = YES;
+            flameTimer--;
+            float ratio = (flameTimer / flameTimerMax)*255;
+            if (ratio < 0) {
+                self.flame.sprite.opacity = 0;
+                self.isOnFire = NO;
+                isFlameFadding = NO;
+                flameTimer = 0;
+                [self.flame removeAnimation];
+            } else {
+                self.flame.sprite.opacity = ratio;
+            }
+        }
+    }
+}
+
+- (void) resetFlameTimer
+{
+    flameTimer = 0.0;
+    isFlameFadding = NO;
+    self.flame.sprite.opacity = 255.0;
+}
+
 - (void) onEnter
 {
 	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
@@ -127,13 +177,11 @@ enum {
 {
     CGPoint touchPoint = [touch locationInView:[touch view]];
 	touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
-    
-    //self.position = ccp(touchPoint.x, touchPoint.y);
 }
 
 - (void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    NSLog(@"player sdfsffsfsdfd");
+    NSLog(@"Player was touched!");
 }
 
 - (void) dealloc

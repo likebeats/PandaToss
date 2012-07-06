@@ -110,7 +110,7 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
-	
+    
 	// Run the intro Scene
 	[director runWithScene: [GameScene scene]];
 }

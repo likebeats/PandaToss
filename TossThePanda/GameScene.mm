@@ -6,13 +6,8 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "Types.h"
 #import "GameScene.h"
-
-enum {
-	kPlayerCollisionType = 1,
-	kFloorCollisionType = 2,
-    kFireCollisionType = 3
-};
 
 @implementation GameScene
 
@@ -42,7 +37,7 @@ enum {
 		
         [self initScene];
         
-        [self debugDrawShapes:NO];
+        [self debugDrawShapes:YES];
         [self debugDrawJoints:NO];
         [self debugDrawAABB:NO];
         [self debugDrawPair:NO];
@@ -75,8 +70,17 @@ enum {
         cannon_name = @"tank";
     }
     
+    xnew = 0;
+    
+    goodBall = 0;
+    goodTime = 20;
+    newGoodTime = 30;
+    
     floorGroup = [CCNode node];
     bgGroup = [CCNode node];
+    
+    goodies = [[CCArray alloc] init];
+    baddies = [[CCArray alloc] init];
     
     gradientsGroups = [[NSMutableArray alloc] initWithCapacity:2];
     for (int j = 0; j < 2; j++) {
@@ -159,23 +163,7 @@ enum {
     cannon.position = player.position;
     [floorGroup addChild:cannon];
     
-    fallLine = cannon.position.y;
-    
-    Animation *campFire = [Animation initWithSpriteSheet:@"campfire.png"];
-    campFire.world = self;
-    campFire.physicsType = kStatic;
-    campFire.collisionType = kFireCollisionType;
-    campFire.collidesWithType = kPlayerCollisionType;
-    campFire.delayTime = 0.2;   // frame delay time
-    campFire.totalFrames = 2;   // total number of frames
-    campFire.sheetRows = 1;     // how many rows in sprite sheet?
-    campFire.sheetColumns = 2;  // how many columns in sprite sheet?
-    campFire.frameWidth = 80;
-    campFire.frameHeight = 120;
-    campFire.position = ccp(player.position.x+400, fallLine);
-    campFire.spriteBoxSize = CGSizeMake(70, 50); // size of physics box
-    campFire.spriteBoxName = @"campfire";
-    [floorGroup addChild:campFire z:1];
+    fallLine = cannon.position.y-20;
     
     [self addChild:bgGroup];
     [self addChild:floorGroup];
@@ -255,9 +243,12 @@ enum {
     
     [self spawnGoodies];
     [self spawnBaddies];
+    [self removeOffScreenObjects];
     
     // Check when player stops/slows player down at low velocity
     [player checkIfPlayerStops:[[floors objectAtIndex:0] position].y];
+    [player controlPlayerFire];
+    
 }
 
 - (void)moveCamera
@@ -342,12 +333,62 @@ enum {
 
 - (void)spawnGoodies
 {
-    
+    if (goodTime < 1 && player.position.x > goodBall + 150)
+    {
+        int spawnedAll = 5;
+        xnew = player.position.x + 800;
+        if ((arc4random() % 1) == 0 && spawnedAll > 0)
+        {
+            NSLog(@"spawing campfire");
+            xnew = xnew + (150 + (arc4random() % 300));
+            
+            Animation *campFire = [Animation newAnimationWithBody:@"campfire.png" 
+                                                         Position:ccp(xnew, fallLine) 
+                                                        DelayTime:0.2 
+                                                      TotalFrames:2 
+                                                        SheetRows:1 
+                                                     SheetColumns:2 
+                                                       FrameWidth:80 
+                                                      FrameHeight:120 
+                                                    RepeatForever:YES 
+                                                            World:self 
+                                                      PhysicsType:kStatic 
+                                                          BoxName:@"campfire" 
+                                                          BoxSize:CGSizeMake(70, 50) 
+                                                    CollisionType:kFireCollisionType 
+                                                 CollidesWithType:kPlayerCollisionType ];
+            [floorGroup addChild:campFire z:1];
+            [goodies addObject:campFire];
+            
+            spawnedAll--;
+        }
+        goodBall = player.position.x;
+        goodTime = newGoodTime;
+    }
+    goodTime--;
 }
 
 - (void)spawnBaddies
 {
     
+}
+
+- (void)removeOffScreenObjects
+{
+    Animation* animation;
+    CCARRAY_FOREACH(goodies, animation) {
+        if ((player.position.x - animation.sprite.position.x) > 700) {
+            [animation removeAnimation];
+            [goodies removeObject:animation];
+        }
+    }
+    
+    CCARRAY_FOREACH(baddies, animation) {
+        if ((player.position.x - animation.sprite.position.x) > 700) {
+            [animation removeAnimation];
+            [baddies removeObject:animation];
+        }
+    }
 }
 
 - (void)rotateCannonMouth: (CGPoint)touch
@@ -379,20 +420,30 @@ enum {
     UITouch* touch = [touches anyObject];
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     
+    Animation *explosion = [Animation newAnimation:@"explosion.png" 
+                                          Position:touchLocation 
+                                         DelayTime:0.05 
+                                       TotalFrames:16 
+                                         SheetRows:4 
+                                      SheetColumns:4 
+                                        FrameWidth:64 
+                                       FrameHeight:64 
+                                     RepeatForever:NO];
+    [self addChild:explosion z:1];
+        
     if (!player.isLaunched) [self rotateCannonMouth:touchLocation];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"touch ended");
-    UITouch* touch = [touches anyObject];
-    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
+    //UITouch* touch = [touches anyObject];
+    //CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     
     if (!player.isLaunched) {
         CCParticleSun *emitter = [CCParticleSun node];
         [emitter setEmitterMode: kCCParticleModeRadius];
         emitter.autoRemoveOnFinish = YES;
-        emitter.texture = [[CCTextureCache sharedTextureCache] addImage:@"fire.png"];
         emitter.position = player.position;
         emitter.duration = 1.0;
         emitter.endRadius = 100.0;
@@ -416,6 +467,8 @@ enum {
 
 - (void) dealloc
 {
+    [goodies release];
+    [baddies release];
     [gradientsGroups release];
     [themeBgs release];
     [floors release];
@@ -425,18 +478,28 @@ enum {
 - (void) onOverlapBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2
 {
 	// check if two boxes have started to overlap
-	if (sprite1.collisionType == kPlayerCollisionType && sprite2.collisionType == kPlayerCollisionType) {
-		
-		CCLOG(@"Two boxes have overlapped. Cool.");
+	if (sprite1.collisionType == kFireCollisionType && sprite2.collisionType == kPlayerCollisionType) {
+        
 	}
 }
 
 - (void) onSeparateBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2
 {
 	// check if two boxes are no longer overlapping
-	if (sprite1.collisionType == kPlayerCollisionType && sprite2.collisionType == kPlayerCollisionType) {
-		
-		CCLOG(@"Two boxes stopped overlapping. That's okay too.");
+	if (sprite1.collisionType == kFireCollisionType && sprite2.collisionType == kPlayerCollisionType) {
+
+        // shoot player into the air when it touches the fire
+        float ds = sqrtf(player.velocity.x*player.velocity.x + player.velocity.y*player.velocity.y);
+        float xs = cos(CC_DEGREES_TO_RADIANS(80)) * ds + 50;
+        float ys = sin(CC_DEGREES_TO_RADIANS(80)) * ds;
+        [player setVelocity:ccp(xs, ys)];
+        if (player.isOnFire == NO) {
+            [player putPlayerOnFire];
+            [floorGroup addChild:player.flame];
+        } else {
+            [player resetFlameTimer];
+        }
+        
 	}
 }
 
@@ -444,12 +507,6 @@ enum {
 {
 	// check if two boxes have collided in the last update
 	if (sprite1.collisionType == kFireCollisionType && sprite2.collisionType == kPlayerCollisionType) {
-        
-        // shoot player into the air when it touches the fire
-        float ds = sqrtf(player.velocity.x*player.velocity.x + player.velocity.y*player.velocity.y);
-        float xs = cos(CC_DEGREES_TO_RADIANS(80)) * ds + 50;
-        float ys = sin(CC_DEGREES_TO_RADIANS(80)) * ds;
-        [player setVelocity:ccp(xs, ys)];
         
 	}
 }
