@@ -39,13 +39,14 @@
 @property (nonatomic) BOOL isOnFire;
 @property (nonatomic, assign) Animation *flame;
 
-+ (id) initWithFileName: (NSString *)file;
++ (id) newPlayer;
 
 - (void) rotateMe;
 - (void) stopRotatingMe;
-- (void) checkIfPlayerStops:(int)floorY;
+- (BOOL) checkIfPlayerStops:(int)floorY;
 - (void) putPlayerOnFire;
 - (void) controlPlayerFire;
 - (void) resetFlameTimer;
+- (void) removeTouch;
 
 @end

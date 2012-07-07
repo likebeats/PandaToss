@@ -12,6 +12,7 @@
 #import "Animation.h"
 #import "Player.h"
 #import "Cannon.h"
+#import "ScoreScene.h"
 
 @interface GameScene : CCWorldLayer
 {
@@ -40,6 +41,8 @@
     int goodTime;
     int newGoodTime;
     int xnew;
+    
+    BOOL roundDone;
 }
 
 +(CCScene *) scene;
@@ -55,5 +58,6 @@
 - (void) spawnBaddies;
 - (void) removeOffScreenObjects;
 - (void) rotateCannonMouth: (CGPoint)touch;
+- (void) openScoreScreen;
 
 @end

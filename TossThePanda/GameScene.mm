@@ -37,7 +37,7 @@
 		
         [self initScene];
         
-        [self debugDrawShapes:YES];
+        [self debugDrawShapes:NO];
         [self debugDrawJoints:NO];
         [self debugDrawAABB:NO];
         [self debugDrawPair:NO];
@@ -49,7 +49,7 @@
 - (void)initScene
 {
     NSString *theme_name;
-    int themeId = 2;
+    int themeId = 3;
     if (themeId == 1) {
         theme_name = @"bamboo";
     } else if (themeId == 2) {
@@ -155,7 +155,7 @@
         offset = 2;
     }
     
-    player = [Player initWithFileName:@"panda3.png"];
+    player = [Player newPlayer];
 	player.world = self;
     [floorGroup addChild:player];
     
@@ -241,13 +241,18 @@
     [self repositionGradientBgs];
     [self repositionThemeBgs];
     
-    [self spawnGoodies];
+    //[self spawnGoodies];
     [self spawnBaddies];
     [self removeOffScreenObjects];
     
     // Check when player stops/slows player down at low velocity
-    [player checkIfPlayerStops:[[floors objectAtIndex:0] position].y];
+    BOOL checkPlayerStop = [player checkIfPlayerStops:[[floors objectAtIndex:0] position].y];
     [player controlPlayerFire];
+    
+    if (checkPlayerStop == YES && roundDone == NO) {
+        roundDone = YES;
+        [self openScoreScreen];
+    }
     
 }
 
@@ -339,7 +344,7 @@
         xnew = player.position.x + 800;
         if ((arc4random() % 1) == 0 && spawnedAll > 0)
         {
-            NSLog(@"spawing campfire");
+            NSLog(@"spawning campfire");
             xnew = xnew + (150 + (arc4random() % 300));
             
             Animation *campFire = [Animation newAnimationWithBody:@"campfire.png" 
@@ -410,6 +415,23 @@
     player.position = ccp(playerNewX,playerNewY);
 }
 
+
+- (void)openScoreScreen
+{
+    self.isTouchEnabled = NO;
+    [player removeTouch];
+    
+    ScoreScene *scoreScreen = [ScoreScene node];
+    scoreScreen.position = ccp(0,screenSize.height);
+    [self addChild:scoreScreen];
+    
+    id action = [CCMoveTo actionWithDuration:3.0f position:ccp(0,0)];
+    [scoreScreen runAction:[CCSequence actions:
+                            action,
+                            [CCCallFunc actionWithTarget:scoreScreen selector:@selector(onTransitionFinish)],
+                            nil]];
+}
+
 - (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
 {
     NSLog(@"touch began");
@@ -430,7 +452,7 @@
                                        FrameHeight:64 
                                      RepeatForever:NO];
     [self addChild:explosion z:1];
-        
+    
     if (!player.isLaunched) [self rotateCannonMouth:touchLocation];
 }
 

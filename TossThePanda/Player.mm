@@ -24,9 +24,9 @@
 	return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
-+ (id) initWithFileName: (NSString *)file
++ (id) newPlayer
 {
-    return [self spriteWithFile:file];
+    return [self spriteWithFile:@"panda3.png"];
 }
 
 - (id) init
@@ -68,7 +68,7 @@
     rotationAction = nil;
 }
 
-- (void) checkIfPlayerStops:(int)floorY
+- (BOOL) checkIfPlayerStops:(int)floorY
 {
     if (x0 != 0 && x0 != 0) {
         deltaX = abs(self.position.x - x0);
@@ -93,11 +93,13 @@
             if (abs(vx) < 0.4 && abs(vy) < 0.4) {
                 if (self.isRotating) [self stopRotatingMe];
                 self.velocity = ccp(0,0);
+                return YES;
             } else {
                 self.velocity = ccp(vx*0.9, vy);
             }
         }
     }
+    return NO;
 }
 
 - (void) putPlayerOnFire
@@ -156,8 +158,13 @@
 
 - (void) onExit
 {
-	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
+	[self removeTouch];
 	[super onExit];
+}
+
+- (void) removeTouch
+{
+    [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 }
 
 - (BOOL) containsTouchLocation:(UITouch *)touch
