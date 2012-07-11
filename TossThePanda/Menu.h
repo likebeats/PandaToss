@@ -1,21 +1,22 @@
 //
-//  ScoreScene.h
+//  Menu.h
 //  TossThePanda
 //
-//  Created by Manpreet on 7/7/12.
+//  Created by Manpreet on 7/10/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "cocos2d.h"
 
-@interface ScoreScene : CCLayer {
+@interface Menu : CCLayer {
     
     CGSize screenSize;
     CGSize screenSizeInPixels;
     
 }
 
++(CCScene *) scene;
+
 - (void) initScene;
-- (void) onTransitionFinish;
 
 @end

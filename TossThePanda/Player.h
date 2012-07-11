@@ -19,6 +19,8 @@
     int deltaY;
     int x0;
     int y0;
+    float startAngle;
+    float angleTime;
     
     //flame
     Animation *flame;
@@ -41,12 +43,15 @@
 
 + (id) newPlayer;
 
+- (void) controlRotating: (ccTime)dt;
 - (void) rotateMe;
 - (void) stopRotatingMe;
 - (BOOL) checkIfPlayerStops:(int)floorY;
 - (void) putPlayerOnFire;
 - (void) controlPlayerFire;
 - (void) resetFlameTimer;
+- (void) removeFlame;
+- (void) addTouch;
 - (void) removeTouch;
 
 @end

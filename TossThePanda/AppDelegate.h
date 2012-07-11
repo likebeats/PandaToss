@@ -13,8 +13,12 @@
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
+    NSUserDefaults * standardUserDefaults;
 }
 
 @property (nonatomic, retain) UIWindow *window;
+
+- (void)setInt:(int)val forKey:(NSString*)key;
+- (void)setString:(NSString*)val forKey:(NSString*)key;
 
 @end

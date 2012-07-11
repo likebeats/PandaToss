@@ -14,6 +14,7 @@
 @synthesize mouth = _mouth;
 @synthesize power = _power;
 @synthesize playerOffset = _playerOffset;
+@synthesize isRotating = _isRotating;
 
 + (id) cannonWithName: (NSString *)name StartingPosition: (CGPoint)point
 {
@@ -73,6 +74,7 @@
 
 - (void) rotateMouth: (float)degree
 {
+    self.isRotating = YES;
     self.mouth.rotation = MAX(MIN(degree, 0), -80);
 }
 

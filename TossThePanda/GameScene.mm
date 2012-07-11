@@ -23,6 +23,8 @@
 {
 	if( (self=[super init])) {
 		
+        standardUserDefaults = [NSUserDefaults standardUserDefaults];
+        
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
         
@@ -49,7 +51,7 @@
 - (void)initScene
 {
     NSString *theme_name;
-    int themeId = 3;
+    int themeId = [standardUserDefaults integerForKey:@"themeId"];
     if (themeId == 1) {
         theme_name = @"bamboo";
     } else if (themeId == 2) {
@@ -59,7 +61,7 @@
     }
     
     NSString *cannon_name;
-    int cannonId = 1;
+    int cannonId = [standardUserDefaults integerForKey:@"cannonId"];
     if (cannonId == 1) {
         cannon_name = @"wood";
     } else if (cannonId == 2) {
@@ -236,24 +238,24 @@
     NSString *height = [NSString stringWithFormat:@"%.0f", player.position.y];
     [heightValue setString:height];
     
-    if (player.isLaunched) [self moveCamera];
+    if (!cannon.isRotating) [self moveCamera];
     [self repositionFloors];
     [self repositionGradientBgs];
     [self repositionThemeBgs];
     
-    //[self spawnGoodies];
+    [self spawnGoodies];
     [self spawnBaddies];
     [self removeOffScreenObjects];
     
     // Check when player stops/slows player down at low velocity
     BOOL checkPlayerStop = [player checkIfPlayerStops:[[floors objectAtIndex:0] position].y];
     [player controlPlayerFire];
+    [player controlRotating:dt];
     
     if (checkPlayerStop == YES && roundDone == NO) {
         roundDone = YES;
         [self openScoreScreen];
     }
-    
 }
 
 - (void)moveCamera
@@ -342,7 +344,7 @@
     {
         int spawnedAll = 5;
         xnew = player.position.x + 800;
-        if ((arc4random() % 1) == 0 && spawnedAll > 0)
+        if ((arc4random() % 30) == 0 && spawnedAll > 0)
         {
             NSLog(@"spawning campfire");
             xnew = xnew + (150 + (arc4random() % 300));
@@ -380,18 +382,38 @@
 
 - (void)removeOffScreenObjects
 {
-    Animation* animation;
-    CCARRAY_FOREACH(goodies, animation) {
-        if ((player.position.x - animation.sprite.position.x) > 700) {
-            [animation removeAnimation];
-            [goodies removeObject:animation];
+    id object;
+    CCARRAY_FOREACH(goodies, object) {
+        BOOL test = [object isKindOfClass:[Animation class]];
+        if (test) {
+            Animation *animation = object;
+            if ((player.position.x - animation.sprite.position.x) > 700) {
+                [animation removeAnimation];
+                [goodies removeObject:animation];
+            }
+        } else {
+            CCBodySprite *sprite = object;
+            if ((player.position.x - sprite.position.x) > 700) {
+                [sprite removeFromParentAndCleanup:YES];
+                [goodies removeObject:sprite];
+            }
         }
     }
     
-    CCARRAY_FOREACH(baddies, animation) {
-        if ((player.position.x - animation.sprite.position.x) > 700) {
-            [animation removeAnimation];
-            [baddies removeObject:animation];
+    CCARRAY_FOREACH(baddies, object) {
+        BOOL test = [object isKindOfClass:[Animation class]];
+        if (test) {
+            Animation *animation = object;
+            if ((player.position.x - animation.sprite.position.x) > 700) {
+                [animation removeAnimation];
+                [goodies removeObject:animation];
+            }
+        } else {
+            CCBodySprite *sprite = object;
+            if ((player.position.x - sprite.position.x) > 700) {
+                [sprite removeFromParentAndCleanup:YES];
+                [goodies removeObject:sprite];
+            }
         }
     }
 }
@@ -415,13 +437,47 @@
     player.position = ccp(playerNewX,playerNewY);
 }
 
+- (void)reset
+{
+    roundDone = NO;
+    self.isTouchEnabled = YES;
+    [self removeChild:scoreScreen cleanup:YES];
+    [self removeChild:menuScreen cleanup:YES];
+    player.physicsType = kStatic;
+    player.visible = NO;
+    
+    for (int j = 0; j < 2; j++) {
+        CCNode *gradientGroup = [gradientsGroups objectAtIndex:j];
+        [gradientGroup setPosition:ccp(0+(700*j),gradientGroup.position.y)];
+    }
+    
+    int bgoffset = 0;
+    for (int i = 0; i < 2; i++) {
+        CCSprite *themeBg = [themeBgs objectAtIndex:i];
+        themeBg.position = ccp(themeBg.contentSize.width*i-bgoffset,themeBg.position.y);
+        bgoffset = 1;
+    }
+    
+    int offset = 0;
+    for (int i = 0; i < 3; i++) {
+        CCBodySprite *floor = [floors objectAtIndex:i];
+        floor.position = ccp(floor.contentSize.width*i-offset, floor.position.y);
+        offset = 2;
+    }
+    
+    player.position = player.startingPoint;
+    player.isLaunched = NO;
+    player.isFlying = NO;
+    [player removeFlame];
+    [player addTouch];
+}
 
 - (void)openScoreScreen
 {
-    self.isTouchEnabled = NO;
-    [player removeTouch];
+    [self stopGame];
+    [self setNextTheme];
     
-    ScoreScene *scoreScreen = [ScoreScene node];
+    scoreScreen = [ScoreScene node];
     scoreScreen.position = ccp(0,screenSize.height);
     [self addChild:scoreScreen];
     
@@ -430,6 +486,24 @@
                             action,
                             [CCCallFunc actionWithTarget:scoreScreen selector:@selector(onTransitionFinish)],
                             nil]];
+}
+
+- (void)stopGame
+{
+    self.isTouchEnabled = NO;
+    [player removeTouch];
+}
+
+- (void)setNextTheme
+{
+    int themeId = [standardUserDefaults integerForKey:@"themeId"];
+    if (themeId == 3) {
+        themeId = 1;
+    } else {
+        themeId++;
+    }
+    [standardUserDefaults setInteger:themeId forKey:@"themeId"];
+    [standardUserDefaults synchronize];
 }
 
 - (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
@@ -462,6 +536,7 @@
     //UITouch* touch = [touches anyObject];
     //CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     
+    cannon.isRotating = NO;
     if (!player.isLaunched) {
         CCParticleSun *emitter = [CCParticleSun node];
         [emitter setEmitterMode: kCCParticleModeRadius];

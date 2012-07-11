@@ -13,9 +13,12 @@
 #import "Player.h"
 #import "Cannon.h"
 #import "ScoreScene.h"
+#import "Menu.h"
+#import "Shop.h"
 
 @interface GameScene : CCWorldLayer
 {
+    NSUserDefaults * standardUserDefaults;
     CGSize screenSize;
     CGSize screenSizeInPixels;
     
@@ -43,6 +46,8 @@
     int xnew;
     
     BOOL roundDone;
+    ScoreScene *scoreScreen;
+    Menu *menuScreen;
 }
 
 +(CCScene *) scene;
@@ -58,6 +63,8 @@
 - (void) spawnBaddies;
 - (void) removeOffScreenObjects;
 - (void) rotateCannonMouth: (CGPoint)touch;
+- (void) reset;
 - (void) openScoreScreen;
-
+- (void) stopGame;
+- (void) setNextTheme;
 @end

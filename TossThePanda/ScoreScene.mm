@@ -8,6 +8,7 @@
 
 #import "Types.h"
 #import "ScoreScene.h"
+#import "GameScene.h"
 
 @implementation ScoreScene
 
@@ -24,11 +25,6 @@
     return self;
 }
 
-- (void) draw
-{
-    // do nothing
-}
-
 - (void) initScene
 {
     CCSprite *sprite = [CCSprite spriteWithFile:@"score_screen_panel.png"];
@@ -36,15 +32,28 @@
     sprite.position = ccp(13,screenSize.height);
     [self addChild:sprite z:1];
     
+    CCMenuItem *menuBtn = [CCMenuItemFont itemFromString: @"Menu" target: self selector:@selector(openMenu)];
     CCMenuItem *retryBtn = [CCMenuItemFont itemFromString: @"Retry" target: self selector:@selector(retry)];
-    CCMenu *menu = [CCMenu menuWithItems:retryBtn, nil];
+    CCMenuItem *shopBtn = [CCMenuItemFont itemFromString: @"Shop" target: self selector:@selector(openShop)];
+    CCMenu *menu = [CCMenu menuWithItems:menuBtn, retryBtn, shopBtn, nil];
     menu.position = ccp(screenSize.width/2,screenSize.height/2);
+    [menu alignItemsHorizontally];
     [self addChild:menu z:1];
+}
+
+- (void) openMenu
+{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[Menu scene]]];
 }
 
 - (void) retry
 {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene scene]]];
+}
+
+- (void) openShop
+{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[Shop scene]]];
 }
 
 - (void) onTransitionFinish
@@ -69,7 +78,7 @@
 
 - (void) dealloc
 {
-	[super dealloc];
+    [super dealloc];
 }
 
 @end

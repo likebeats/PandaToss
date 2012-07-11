@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "GameScene.h"
+#import "Menu.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
@@ -111,10 +111,34 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
     
+    
+    // Set gameData defaults
+    standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [self setInt:1 forKey:@"themeId"];
+    [self setInt:1 forKey:@"cannonId"];
+    
+    [standardUserDefaults synchronize];
+    
+    
+    
 	// Run the intro Scene
-	[director runWithScene: [GameScene scene]];
+	[director runWithScene: [Menu scene]];
 }
 
+- (void)setInt:(int)val forKey:(NSString*)key
+{
+    if (![standardUserDefaults integerForKey:key]) {
+        [standardUserDefaults setInteger:val forKey:key];
+    }
+}
+
+- (void)setString:(NSString*)val forKey:(NSString*)key
+{
+    if (![standardUserDefaults integerForKey:key]) {
+        [standardUserDefaults setObject:val forKey:key];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	[[CCDirector sharedDirector] pause];

@@ -15,12 +15,14 @@
     
     float power;
     CGPoint playerOffset;
+    
 }
 
 @property (nonatomic, assign) CCSprite *body;
 @property (nonatomic, assign) CCSprite *mouth;
 @property (nonatomic) float power;
 @property (nonatomic) CGPoint playerOffset;
+@property (nonatomic) BOOL isRotating;
 
 + (id) cannonWithName: (NSString *)name StartingPosition: (CGPoint)point;
 - (id) initCannonWithName: (NSString *)name StartingPosition: (CGPoint)point;

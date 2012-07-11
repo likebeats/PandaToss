@@ -15,6 +15,7 @@
 		3F1BC8E715A8BC09009DF54F /* ScoreScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BC8E615A8BC08009DF54F /* ScoreScene.mm */; };
 		3F1BC8EB15A8D2B7009DF54F /* score_screen_panel.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1BC8EA15A8D2B7009DF54F /* score_screen_panel.png */; };
 		3F1BC8ED15A8DAAE009DF54F /* score_screen_panel-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1BC8EC15A8DAAE009DF54F /* score_screen_panel-hd.png */; };
+		3F31EAAE15ACB76500F5A3A6 /* Menu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F31EAAD15ACB76500F5A3A6 /* Menu.mm */; };
 		3F4CFD5815914FBD00A9E02E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4CFD5715914FBD00A9E02E /* fire.png */; };
 		3F4CFD5A1591500A00A9E02E /* fire-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4CFD591591500A00A9E02E /* fire-hd.png */; };
 		3F56598E157FF34700743B1A /* panda3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F56598C157FF34700743B1A /* panda3-hd.png */; };
@@ -40,6 +41,7 @@
 		3FAEC8CF158CF7810032710D /* campfire.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAEC8CD158CF7810032710D /* campfire.png */; };
 		3FAEC912158D41B00032710D /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAEC911158D41B00032710D /* explosion.png */; };
 		3FAEC914158D7E690032710D /* explosion-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAEC913158D7E690032710D /* explosion-hd.png */; };
+		3FB6138A15AE309400F66292 /* Shop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6138815AE309300F66292 /* Shop.mm */; };
 		3FE462E91579108A00F3A904 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462E81579108A00F3A904 /* QuartzCore.framework */; };
 		3FE462EB1579108A00F3A904 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462EA1579108A00F3A904 /* OpenGLES.framework */; };
 		3FE462ED1579108A00F3A904 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462EC1579108A00F3A904 /* OpenAL.framework */; };
@@ -224,6 +226,8 @@
 		3F1BC8E615A8BC08009DF54F /* ScoreScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScoreScene.mm; sourceTree = "<group>"; };
 		3F1BC8EA15A8D2B7009DF54F /* score_screen_panel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score_screen_panel.png; sourceTree = "<group>"; };
 		3F1BC8EC15A8DAAE009DF54F /* score_screen_panel-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score_screen_panel-hd.png"; sourceTree = "<group>"; };
+		3F31EAAC15ACB76400F5A3A6 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		3F31EAAD15ACB76500F5A3A6 /* Menu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Menu.mm; sourceTree = "<group>"; };
 		3F4CFD5715914FBD00A9E02E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/objects/fire.png; sourceTree = "<group>"; };
 		3F4CFD591591500A00A9E02E /* fire-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fire-hd.png"; path = "Resources/objects/fire-hd.png"; sourceTree = "<group>"; };
 		3F56598C157FF34700743B1A /* panda3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "panda3-hd.png"; path = "Resources/panda3-hd.png"; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 		3FAEC8CD158CF7810032710D /* campfire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = campfire.png; path = Resources/objects/campfire.png; sourceTree = "<group>"; };
 		3FAEC911158D41B00032710D /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion.png; path = Resources/objects/explosion.png; sourceTree = "<group>"; };
 		3FAEC913158D7E690032710D /* explosion-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "explosion-hd.png"; path = "Resources/objects/explosion-hd.png"; sourceTree = "<group>"; };
+		3FB6138815AE309300F66292 /* Shop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shop.mm; sourceTree = "<group>"; };
+		3FB6138915AE309400F66292 /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
 		3FE462E41579108A00F3A904 /* TossThePanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TossThePanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE462E81579108A00F3A904 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3FE462EA1579108A00F3A904 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -657,10 +663,14 @@
 				3FE464B11579108F00F3A904 /* AppDelegate.mm */,
 				3FE464B31579108F00F3A904 /* RootViewController.h */,
 				3FE464B41579108F00F3A904 /* RootViewController.m */,
+				3F31EAAC15ACB76400F5A3A6 /* Menu.h */,
+				3F31EAAD15ACB76500F5A3A6 /* Menu.mm */,
 				3FE464B61579108F00F3A904 /* GameScene.h */,
 				3FE464B71579108F00F3A904 /* GameScene.mm */,
 				3F1BC8E515A8BC08009DF54F /* ScoreScene.h */,
 				3F1BC8E615A8BC08009DF54F /* ScoreScene.mm */,
+				3FB6138915AE309400F66292 /* Shop.h */,
+				3FB6138815AE309300F66292 /* Shop.mm */,
 				3FF5BAA81587C4D100DAB589 /* Animation.h */,
 				3FF5BAA61587C4AA00DAB589 /* Animation.mm */,
 				3F16FE611588F55C00A759CE /* Cannon.h */,
@@ -1370,6 +1380,8 @@
 				3FF5BAA71587C4AA00DAB589 /* Animation.mm in Sources */,
 				3F16FE631588F55C00A759CE /* Cannon.mm in Sources */,
 				3F1BC8E715A8BC09009DF54F /* ScoreScene.mm in Sources */,
+				3F31EAAE15ACB76500F5A3A6 /* Menu.mm in Sources */,
+				3FB6138A15AE309400F66292 /* Shop.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

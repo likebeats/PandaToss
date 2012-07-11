@@ -51,21 +51,29 @@
         self.bounce = 0.70f;
         self.visible = NO;
         [self addCircleWithName:@"player" ofRadius:10.0f];
+        
+        startAngle = [self rotation];
+        angleTime = 0;
     }
     return self;
 }
 
+- (void) controlRotating: (ccTime)dt
+{
+    if (self.isRotating == YES) {
+        angleTime = angleTime + dt;
+        [self setRotation: (startAngle + 100 * angleTime )];
+    }
+}
+
 - (void) rotateMe
 {
-    rotationAction = [self runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:0.02 angle:5]]];
     self.isRotating = YES;
 }
 
 - (void) stopRotatingMe
 {
     self.isRotating = NO;
-    [rotationAction stop];
-    rotationAction = nil;
 }
 
 - (BOOL) checkIfPlayerStops:(int)floorY
@@ -131,11 +139,7 @@
             flameTimer--;
             float ratio = (flameTimer / flameTimerMax)*255;
             if (ratio < 0) {
-                self.flame.sprite.opacity = 0;
-                self.isOnFire = NO;
-                isFlameFadding = NO;
-                flameTimer = 0;
-                [self.flame removeAnimation];
+                [self removeFlame];
             } else {
                 self.flame.sprite.opacity = ratio;
             }
@@ -150,9 +154,18 @@
     self.flame.sprite.opacity = 255.0;
 }
 
+- (void) removeFlame
+{
+    self.flame.sprite.opacity = 0;
+    self.isOnFire = NO;
+    isFlameFadding = NO;
+    flameTimer = 0;
+    [self.flame removeAnimation];
+}
+
 - (void) onEnter
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [self addTouch];
 	[super onEnter];
 }
 
@@ -160,6 +173,11 @@
 {
 	[self removeTouch];
 	[super onExit];
+}
+
+- (void) addTouch
+{
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 - (void) removeTouch
