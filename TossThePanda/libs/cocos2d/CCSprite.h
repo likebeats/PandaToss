@@ -348,4 +348,6 @@ typedef enum {
  */
 -(void) addAnimation: (CCAnimation*) animation DEPRECATED_ATTRIBUTE;
 
+-(void)resizeTo:(CGSize) theSize;
+
 @end

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "GameConfig.h"
 #import "Menu.h"
+#import "Shop.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
@@ -115,6 +116,7 @@
     // Set gameData defaults
     standardUserDefaults = [NSUserDefaults standardUserDefaults];
     
+    [self setInt:100 forKey:@"bank"];
     [self setInt:1 forKey:@"themeId"];
     [self setInt:1 forKey:@"cannonId"];
     
@@ -123,7 +125,7 @@
     
     
 	// Run the intro Scene
-	[director runWithScene: [Menu scene]];
+	[director runWithScene: [Shop scene]];
 }
 
 - (void)setInt:(int)val forKey:(NSString*)key
@@ -135,7 +137,7 @@
 
 - (void)setString:(NSString*)val forKey:(NSString*)key
 {
-    if (![standardUserDefaults integerForKey:key]) {
+    if (![standardUserDefaults objectForKey:key]) {
         [standardUserDefaults setObject:val forKey:key];
     }
 }

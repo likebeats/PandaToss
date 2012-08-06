@@ -382,17 +382,17 @@
 
 - (void)removeOffScreenObjects
 {
-    id object;
+    CCNode *object;
     CCARRAY_FOREACH(goodies, object) {
         BOOL test = [object isKindOfClass:[Animation class]];
         if (test) {
-            Animation *animation = object;
+            Animation *animation = (Animation*)object;
             if ((player.position.x - animation.sprite.position.x) > 700) {
                 [animation removeAnimation];
                 [goodies removeObject:animation];
             }
         } else {
-            CCBodySprite *sprite = object;
+            CCBodySprite *sprite = (CCBodySprite*)object;
             if ((player.position.x - sprite.position.x) > 700) {
                 [sprite removeFromParentAndCleanup:YES];
                 [goodies removeObject:sprite];
@@ -400,16 +400,16 @@
         }
     }
     
-    CCARRAY_FOREACH(baddies, object) {
+    CCARRAY_FOREACH(goodies, object) {
         BOOL test = [object isKindOfClass:[Animation class]];
         if (test) {
-            Animation *animation = object;
+            Animation *animation = (Animation*)object;
             if ((player.position.x - animation.sprite.position.x) > 700) {
                 [animation removeAnimation];
                 [goodies removeObject:animation];
             }
         } else {
-            CCBodySprite *sprite = object;
+            CCBodySprite *sprite = (CCBodySprite*)object;
             if ((player.position.x - sprite.position.x) > 700) {
                 [sprite removeFromParentAndCleanup:YES];
                 [goodies removeObject:sprite];
@@ -437,7 +437,7 @@
     player.position = ccp(playerNewX,playerNewY);
 }
 
-- (void)reset
+- (void)reset // NOT USED
 {
     roundDone = NO;
     self.isTouchEnabled = YES;
