@@ -119,6 +119,14 @@
     }
 }
 
+-(void) setOpacity: (GLubyte) opacity
+{
+    for( CCScrollMenuItem *node in nodeItems )
+    {
+        [node setOpacity: opacity];
+    }
+}
+
 - (void) dealloc
 {
     [nodeItems release];

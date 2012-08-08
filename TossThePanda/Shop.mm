@@ -46,8 +46,8 @@
     [self addChild:bg];
     
     menu_item1 = [CCMenuItemImage itemFromNormalImage:@"shop_menu_item.png" selectedImage:nil target:self selector:@selector(openGuns)];
-    menu_item2 = [CCMenuItemImage itemFromNormalImage:@"shop_menu_item.png" selectedImage:nil target:self selector:@selector(openPandaUps)];
-    menu_item3 = [CCMenuItemImage itemFromNormalImage:@"shop_menu_item.png" selectedImage:nil target:self selector:@selector(openCannons)];
+    menu_item2 = [CCMenuItemImage itemFromNormalImage:@"shop_menu_item.png" selectedImage:nil target:self selector:@selector(openCannons)];
+    menu_item3 = [CCMenuItemImage itemFromNormalImage:@"shop_menu_item.png" selectedImage:nil target:self selector:@selector(openExtras)];
     
     tab_menu = [CCMenu menuWithItems:menu_item1, menu_item2, menu_item3, nil];
     [tab_menu alignItemsHorizontallyWithPadding:10];
@@ -127,12 +127,20 @@
         
         CCScrollMenuItem *panelNode = [CCScrollMenuItem node];
         panelNode.contentSize = CGSizeMake(142,88);
-        CCSprite *panel = [CCSprite spriteWithFile:@"shop_panel.png"];
-        CCLabelTTF *gun_title_lbl = [CCLabelTTF labelWithString:gun_title fontName:@"Chalkduster" fontSize: 16];
+        
+        RoundedRectNode *panel = [RoundedRectNode newRectWithSize:panelNode.contentSize];
+        panel.borderWidth = 2.5;
+        panel.position = ccp(-panelNode.contentSize.width/2,panelNode.contentSize.height/2);
+        panel.color = ccc4(235, 241, 199, 255*0.7);
+        panel.borderColor = ccc4(167, 172, 135, 255*0.7);
+        panel.radius = 5;
+        panel.cornerSegments = 5;
+        
+        CCLabelTTF *gun_title_lbl = [CCLabelTTF labelWithString:gun_title fontName:@"Papyrus" fontSize: 18];
         CCSprite *gun_sprite = [CCSprite spriteWithFile:gun_file_name];
         
         gun_title_lbl.color = ccc3(93, 154, 21);
-        gun_title_lbl.position = ccp(0,26);
+        gun_title_lbl.position = ccp(0,24);
         gun_sprite.position = ccp(0,-10);
         
         [panelNode addChild:panel];
@@ -145,9 +153,60 @@
     }
     
     gunScrollMenu = [CCScrollMenu newScrollMenu:gun_panels padding:20];
-    gunScrollMenu.position = ccp(10, 90);
+    [gunScrollMenu setOpacity:0];
+    gunScrollMenu.isTouchEnabled = NO;
     [self addChild:gunScrollMenu];
     /* --------------------------  END GUNS  --------------------------------------  */
+    
+    /* --------------------------  CANNONS   --------------------------------------  */
+    NSMutableArray *cannon_panels = [NSMutableArray arrayWithCapacity:10];
+    
+    for (int i=0; i<10; i++) {
+        CCScrollMenuItem *panelNode = [CCScrollMenuItem node];
+        panelNode.contentSize = CGSizeMake(142,88);
+        
+        RoundedRectNode *panel = [RoundedRectNode newRectWithSize:panelNode.contentSize];
+        panel.borderWidth = 2.5;
+        panel.position = ccp(-panelNode.contentSize.width/2,panelNode.contentSize.height/2);
+        panel.color = ccc4(235, 241, 199, 255*0.7);
+        panel.borderColor = ccc4(167, 172, 135, 255*0.7);
+        panel.radius = 5;
+        panel.cornerSegments = 5;
+        
+        [panelNode addChild:panel];
+        [cannon_panels addObject:panelNode];
+    }
+    cannonScrollMenu = [CCScrollMenu newScrollMenu:cannon_panels padding:20];
+    [cannonScrollMenu setOpacity:0];
+    cannonScrollMenu.isTouchEnabled = NO;
+    [self addChild:cannonScrollMenu];
+    /* --------------------------  END CANNONS   ----------------------------------  */
+    
+    /* --------------------------  EXTRAS   ---------------------------------------  */
+    NSMutableArray *extra_panels = [NSMutableArray arrayWithCapacity:10];
+    
+    for (int i=0; i<10; i++) {
+        CCScrollMenuItem *panelNode = [CCScrollMenuItem node];
+        panelNode.contentSize = CGSizeMake(142,88);
+        
+        RoundedRectNode *panel = [RoundedRectNode newRectWithSize:panelNode.contentSize];
+        panel.borderWidth = 2.5;
+        panel.position = ccp(-panelNode.contentSize.width/2,panelNode.contentSize.height/2);
+        panel.color = ccc4(235, 241, 199, 255*0.7);
+        panel.borderColor = ccc4(167, 172, 135, 255*0.7);
+        panel.radius = 5;
+        panel.cornerSegments = 5;
+        
+        [panelNode addChild:panel];
+        [extra_panels addObject:panelNode];
+    }
+    extraScrollMenu = [CCScrollMenu newScrollMenu:extra_panels padding:20];
+    [extraScrollMenu setOpacity:0];
+    extraScrollMenu.isTouchEnabled = NO;
+    [self addChild:extraScrollMenu];
+    /* --------------------------  END EXTRAS   ----------------------------------  */
+    
+    [self openGuns];
 }
 
 - (void) disableTouchesForPopup
@@ -167,12 +226,19 @@
     [self disableTouchesForPopup];
     
     gunDetailsPopup = [CCNode node];
-    gunDetailsPopup.position = ccp(screenSize.width/2, screenSize.height/2);
+    gunDetailsPopup.contentSize = CGSizeMake(350, 200);
+    gunDetailsPopup.position = ccp(screenSize.width/2, screenSize.height/2-20);
     gunDetailsPopup.scale = 0;
     [self addChild:gunDetailsPopup z:2];
     
-    CCSprite *popup_bg = [CCSprite spriteWithFile:@"shop_popup.png"];
-    [gunDetailsPopup addChild:popup_bg z:0];
+    RoundedRectNode *popup_bg = [RoundedRectNode newRectWithSize:gunDetailsPopup.contentSize];
+    popup_bg.borderWidth = 2.5;
+    popup_bg.position = ccp(-gunDetailsPopup.contentSize.width/2,gunDetailsPopup.contentSize.height/2);
+    popup_bg.color = ccc4(235, 241, 199, 255);
+    popup_bg.borderColor = ccc4(167, 172, 135, 255);
+    popup_bg.radius = 5;
+    popup_bg.cornerSegments = 5;
+    [gunDetailsPopup addChild:popup_bg];
     
     [CCMenuItemFont setFontSize:24];
     CCMenuItemFont *close_btn_item = [CCMenuItemFont itemFromString:@"X" target:self selector:@selector(closeGunDetailsPopup)];
@@ -181,15 +247,24 @@
     close_btn.position = ccp(-150,75);
     [gunDetailsPopup addChild:close_btn];
     
-    CCLabelTTF *gun_title = [CCLabelTTF labelWithString:[gun_titles objectAtIndex:index] fontName:@"Chalkduster" fontSize: 20];
+    CCLabelTTF *gun_title = [CCLabelTTF labelWithString:[gun_titles objectAtIndex:index] fontName:@"Papyrus" fontSize: 28];
     gun_title.position = ccp(0,65);
     gun_title.color = ccc3(93, 154, 21);
-    [gunDetailsPopup addChild:gun_title z:1];
+    [gunDetailsPopup addChild:gun_title];
+    
+    RoundedRectNode *gun_bg = [RoundedRectNode newRectWithSize:CGSizeMake(160, 100)];
+    gun_bg.borderWidth = 2.5;
+    gun_bg.position = ccp(-160,40);
+    gun_bg.color = ccc4(249, 241, 190, 255);
+    gun_bg.borderColor = ccc4(169, 149, 61, 255);
+    gun_bg.radius = 5;
+    gun_bg.cornerSegments = 5;
+    [gunDetailsPopup addChild:gun_bg];
     
     CCSprite *gun_sprite = [CCSprite spriteWithFile:[gun_file_names objectAtIndex:index]];
     gun_sprite.position = ccp(-80,-10);
     gun_sprite.scale = 1.5;
-    [gunDetailsPopup addChild:gun_sprite z:1];
+    [gunDetailsPopup addChild:gun_sprite];
     
     switch (index) {
         case 0: // Revolver
@@ -232,7 +307,8 @@
 - (void) closeGunDetailsPopup
 {
     [self enableTouchesForPopup];
-    gunDetailsPopup.visible = NO;
+    [gunDetailsPopup removeFromParentAndCleanup:YES];
+    gunDetailsPopup = nil;
 }
 
 - (void) openGuns
@@ -242,26 +318,41 @@
         tab_open = 1;
         [menu_item1 runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,-tab_animation_delta)]];
         [menu_item1_lbl runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,-tab_animation_delta)]];
+        gunScrollMenu.position = ccp(10,gunScrollMenu.contentSize.height+90);
+        [gunScrollMenu stopAllActions];
+        [gunScrollMenu runAction:[CCFadeIn actionWithDuration:0.6]];
+        [gunScrollMenu runAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0,-gunScrollMenu.contentSize.height)]];
+        gunScrollMenu.isTouchEnabled = YES;
     }
 }
 
-- (void) openPandaUps
+- (void) openCannons
 {
     if (tab_open != 2) {
         [self closeOpenedTab];
         tab_open = 2;
         [menu_item2 runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,-tab_animation_delta)]];
         [menu_item2_lbl runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,-tab_animation_delta)]];
+        cannonScrollMenu.position = ccp(10,cannonScrollMenu.contentSize.height+90);
+        [cannonScrollMenu stopAllActions];
+        [cannonScrollMenu runAction:[CCFadeIn actionWithDuration:0.6]];
+        [cannonScrollMenu runAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0,-cannonScrollMenu.contentSize.height)]];
+        cannonScrollMenu.isTouchEnabled = YES;
     }
 }
 
-- (void) openCannons
+- (void) openExtras
 {
     if (tab_open != 3) {
         [self closeOpenedTab];
         tab_open = 3;
         [menu_item3 runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,-tab_animation_delta)]];
         [menu_item3_lbl runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,-tab_animation_delta)]];
+        extraScrollMenu.position = ccp(10,extraScrollMenu.contentSize.height+90);
+        [extraScrollMenu stopAllActions];
+        [extraScrollMenu runAction:[CCFadeIn actionWithDuration:0.6]];
+        [extraScrollMenu runAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0,-extraScrollMenu.contentSize.height)]];
+        extraScrollMenu.isTouchEnabled = YES;
     }
 }
 
@@ -270,12 +361,24 @@
     if (tab_open == 1) {
         [menu_item1 runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,tab_animation_delta)]];
         [menu_item1_lbl runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,tab_animation_delta)]];
+        [gunScrollMenu stopAllActions];
+        [gunScrollMenu runAction:[CCFadeOut actionWithDuration:0.3]];
+        [gunScrollMenu runAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0,-gunScrollMenu.contentSize.height)]];
+        gunScrollMenu.isTouchEnabled = NO;
     } else if (tab_open == 2) {
         [menu_item2 runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,tab_animation_delta)]];
         [menu_item2_lbl runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,tab_animation_delta)]];
+        [cannonScrollMenu stopAllActions];
+        [cannonScrollMenu runAction:[CCFadeOut actionWithDuration:0.3]];
+        [cannonScrollMenu runAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0,-cannonScrollMenu.contentSize.height)]];
+        cannonScrollMenu.isTouchEnabled = NO;
     } else if (tab_open == 3) {
         [menu_item3 runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,tab_animation_delta)]];
         [menu_item3_lbl runAction:[CCMoveBy actionWithDuration:0.1 position:ccp(0,tab_animation_delta)]];
+        [extraScrollMenu stopAllActions];
+        [extraScrollMenu runAction:[CCFadeOut actionWithDuration:0.3]];
+        [extraScrollMenu runAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0,-extraScrollMenu.contentSize.height)]];
+        extraScrollMenu.isTouchEnabled = NO;
     }
 }
 

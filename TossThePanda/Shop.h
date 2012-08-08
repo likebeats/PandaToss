@@ -7,6 +7,7 @@
 //
 
 #import "cocos2d.h"
+#import "RoundedRectNode.h"
 #import "CCScrollMenu.h"
 
 @interface Shop : CCLayer {
@@ -32,6 +33,8 @@
     int tab_animation_delta;
     
     CCScrollMenu *gunScrollMenu;
+    CCScrollMenu *cannonScrollMenu;
+    CCScrollMenu *extraScrollMenu;
     
     CCNode *gunDetailsPopup;
 }
@@ -39,6 +42,9 @@
 +(CCScene *) scene;
 
 - (void) initScene;
+- (void) openGuns;
+- (void) openCannons;
+- (void) openExtras;
 - (void) closeOpenedTab;
 
 @end

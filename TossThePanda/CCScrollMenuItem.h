@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSInvocation *invocation;
 
 - (void) setOnClick:(id)target selector:(SEL)selector index:(int)index;
+- (void) setOpacity: (GLubyte) opacity;
 
 @end

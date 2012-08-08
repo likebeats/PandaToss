@@ -29,6 +29,17 @@
     }
 }
 
+-(void) setOpacity: (GLubyte) opacity
+{
+    for( CCNode *node in [self children] )
+    {
+        if( [node conformsToProtocol:@protocol( CCRGBAProtocol)] )
+        {
+            [(id<CCRGBAProtocol>) node setOpacity: opacity];
+        }
+    }
+}
+
 - (void) dealloc
 {
 	[super dealloc];

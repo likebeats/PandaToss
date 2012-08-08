@@ -28,4 +28,6 @@
 + (id) newScrollMenu:(NSArray *)nodes padding:(int) padding;
 - (id) initScrollMenuWithNodes:(NSArray *)nodes padding:(int) padding;
 
+- (void) setOpacity: (GLubyte) opacity;
+
 @end
