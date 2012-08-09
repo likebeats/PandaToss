@@ -24,6 +24,7 @@
 	if( (self=[super init])) {
 		
         standardUserDefaults = [NSUserDefaults standardUserDefaults];
+        [standardUserDefaults synchronize];
         
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
@@ -44,6 +45,7 @@
         [self debugDrawAABB:NO];
         [self debugDrawPair:NO];
         [self debugDrawCenterOfMass:NO];
+        
 	}
 	return self;
 }
@@ -52,23 +54,23 @@
 {
     NSString *theme_name;
     int themeId = [standardUserDefaults integerForKey:@"themeId"];
-    if (themeId == 1) {
+    if (themeId == 0) {
         theme_name = @"bamboo";
-    } else if (themeId == 2) {
+    } else if (themeId == 1) {
         theme_name = @"forest";
-    } else if (themeId == 3) {
+    } else if (themeId == 2) {
         theme_name = @"desert";
     }
     
     NSString *cannon_name;
     int cannonId = [standardUserDefaults integerForKey:@"cannonId"];
-    if (cannonId == 1) {
+    if (cannonId == 0) {
         cannon_name = @"wood";
-    } else if (cannonId == 2) {
+    } else if (cannonId == 1) {
         cannon_name = @"metal";
-    } else if (cannonId == 3) {
+    } else if (cannonId == 2) {
         cannon_name = @"gold";
-    } else if (cannonId == 4) {
+    } else if (cannonId == 3) {
         cannon_name = @"tank";
     }
     
@@ -503,7 +505,6 @@
         themeId++;
     }
     [standardUserDefaults setInteger:themeId forKey:@"themeId"];
-    [standardUserDefaults synchronize];
 }
 
 - (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event

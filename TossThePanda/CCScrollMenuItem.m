@@ -29,7 +29,7 @@
     }
 }
 
--(void) setOpacity: (GLubyte) opacity
+- (void) setOpacity: (GLubyte) opacity
 {
     for( CCNode *node in [self children] )
     {

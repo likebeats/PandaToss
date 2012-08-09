@@ -116,13 +116,30 @@
     // Set gameData defaults
     standardUserDefaults = [NSUserDefaults standardUserDefaults];
     
+    NSMutableArray *gunsOwned = [NSMutableArray arrayWithObjects:
+                                 [NSNumber numberWithInteger:1],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0],
+                                 [NSNumber numberWithInteger:0], nil];
+    
+    NSMutableArray *cannonsOwned = [NSMutableArray arrayWithObjects:
+                                    [NSNumber numberWithInteger:1],
+                                    [NSNumber numberWithInteger:0],
+                                    [NSNumber numberWithInteger:0],
+                                    [NSNumber numberWithInteger:0], nil];
+    
+    [self setObject:gunsOwned forKey:@"gunsOwned"];
+    [self setObject:cannonsOwned forKey:@"cannonsOwned"];
+    
     [self setInt:100 forKey:@"bank"];
-    [self setInt:1 forKey:@"themeId"];
-    [self setInt:1 forKey:@"cannonId"];
-    
-    [standardUserDefaults synchronize];
-    
-    
+    [self setInt:0 forKey:@"themeId"];
+    [self setInt:0 forKey:@"cannonId"];
+    [self setInt:0 forKey:@"gunId"];
     
 	// Run the intro Scene
 	[director runWithScene: [Shop scene]];
@@ -139,6 +156,13 @@
 {
     if (![standardUserDefaults objectForKey:key]) {
         [standardUserDefaults setObject:val forKey:key];
+    }
+}
+
+- (void)setObject:(id)obj forKey:(NSString*)key
+{
+    if (![standardUserDefaults objectForKey:key]) {
+        [standardUserDefaults setObject:obj forKey:key];
     }
 }
 

@@ -76,6 +76,7 @@
 		3FB9104C15D1C28A0022CC99 /* main_menu_bg-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB9104B15D1C28A0022CC99 /* main_menu_bg-hd.png */; };
 		3FB9104E15D1C3230022CC99 /* logo-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB9104D15D1C3230022CC99 /* logo-hd.png */; };
 		3FB9105015D1C3350022CC99 /* main_menu_buttons-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB9104F15D1C3350022CC99 /* main_menu_buttons-hd.png */; };
+		3FC995EB15D42CD900F9D8F9 /* ShopGunPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FC995EA15D42CD900F9D8F9 /* ShopGunPanel.mm */; };
 		3FE462E91579108A00F3A904 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462E81579108A00F3A904 /* QuartzCore.framework */; };
 		3FE462EB1579108A00F3A904 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462EA1579108A00F3A904 /* OpenGLES.framework */; };
 		3FE462ED1579108A00F3A904 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE462EC1579108A00F3A904 /* OpenAL.framework */; };
@@ -331,6 +332,8 @@
 		3FB9104B15D1C28A0022CC99 /* main_menu_bg-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_menu_bg-hd.png"; sourceTree = "<group>"; };
 		3FB9104D15D1C3230022CC99 /* logo-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-hd.png"; path = "Resources/objects/logo-hd.png"; sourceTree = "<group>"; };
 		3FB9104F15D1C3350022CC99 /* main_menu_buttons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_menu_buttons-hd.png"; sourceTree = "<group>"; };
+		3FC995E915D42CD900F9D8F9 /* ShopGunPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopGunPanel.h; sourceTree = "<group>"; };
+		3FC995EA15D42CD900F9D8F9 /* ShopGunPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShopGunPanel.mm; sourceTree = "<group>"; };
 		3FE462E41579108A00F3A904 /* TossThePanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TossThePanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE462E81579108A00F3A904 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3FE462EA1579108A00F3A904 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -806,6 +809,8 @@
 				3F1BC8E615A8BC08009DF54F /* ScoreScene.mm */,
 				3FB6138915AE309400F66292 /* Shop.h */,
 				3FB6138815AE309300F66292 /* Shop.mm */,
+				3FC995E915D42CD900F9D8F9 /* ShopGunPanel.h */,
+				3FC995EA15D42CD900F9D8F9 /* ShopGunPanel.mm */,
 				3FF5BAA81587C4D100DAB589 /* Animation.h */,
 				3FF5BAA61587C4AA00DAB589 /* Animation.mm */,
 				3F16FE611588F55C00A759CE /* Cannon.h */,
@@ -1563,6 +1568,7 @@
 				3F8B3C2A15CAFEDE00119ED3 /* CCScrollMenu.m in Sources */,
 				3F80A51615D0604200D778FF /* CCScrollMenuItem.m in Sources */,
 				3FB9104915D1BB720022CC99 /* RoundedRectNode.m in Sources */,
+				3FC995EB15D42CD900F9D8F9 /* ShopGunPanel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

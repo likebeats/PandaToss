@@ -24,6 +24,7 @@
 	if( (self=[super init])) {
 		
         standardUserDefaults = [NSUserDefaults standardUserDefaults];
+        [standardUserDefaults synchronize];
         
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = NO;
@@ -119,33 +120,18 @@
                       @"rpg.png",
                       @"golden_hand_gun.png", nil];
     
-    NSMutableArray *gun_panels = [NSMutableArray arrayWithCapacity:[gun_titles count]];
+    gunEquipped = [standardUserDefaults integerForKey:@"gunId"];
+    gunsOwned = [standardUserDefaults objectForKey:@"gunsOwned"];
+    gun_panels = [[NSMutableArray alloc] initWithCapacity:[gun_titles count]];
     
     for (int i=0; i<[gun_titles count]; i++) {
         NSString *gun_title = [gun_titles objectAtIndex:i];
         NSString *gun_file_name = [gun_file_names objectAtIndex:i];
         
-        CCScrollMenuItem *panelNode = [CCScrollMenuItem node];
+        ShopGunPanel *panelNode = [ShopGunPanel newGunPanel:i];
         panelNode.contentSize = CGSizeMake(142,88);
-        
-        RoundedRectNode *panel = [RoundedRectNode newRectWithSize:panelNode.contentSize];
-        panel.borderWidth = 2.5;
-        panel.position = ccp(-panelNode.contentSize.width/2,panelNode.contentSize.height/2);
-        panel.color = ccc4(235, 241, 199, 255*0.7);
-        panel.borderColor = ccc4(167, 172, 135, 255*0.7);
-        panel.radius = 5;
-        panel.cornerSegments = 5;
-        
-        CCLabelTTF *gun_title_lbl = [CCLabelTTF labelWithString:gun_title fontName:@"Papyrus" fontSize: 18];
-        CCSprite *gun_sprite = [CCSprite spriteWithFile:gun_file_name];
-        
-        gun_title_lbl.color = ccc3(93, 154, 21);
-        gun_title_lbl.position = ccp(0,24);
-        gun_sprite.position = ccp(0,-10);
-        
-        [panelNode addChild:panel];
-        [panelNode addChild:gun_title_lbl];
-        [panelNode addChild:gun_sprite];
+        panelNode.gunName = gun_title;
+        panelNode.gunFileName = gun_file_name;
         
         [panelNode setOnClick:self selector:@selector(openGunDetails:) index:i];
         
@@ -153,15 +139,20 @@
     }
     
     gunScrollMenu = [CCScrollMenu newScrollMenu:gun_panels padding:20];
+    gunScrollMenu.position = ccp(10,90);
     [gunScrollMenu setOpacity:0];
     gunScrollMenu.isTouchEnabled = NO;
     [self addChild:gunScrollMenu];
     /* --------------------------  END GUNS  --------------------------------------  */
     
     /* --------------------------  CANNONS   --------------------------------------  */
-    NSMutableArray *cannon_panels = [NSMutableArray arrayWithCapacity:10];
+    NSArray *cannon_titles = [NSArray arrayWithObjects:@"Wood", @"Metal", @"Gold", @"Tank", nil];
     
-    for (int i=0; i<10; i++) {
+    cannonEquipped = [standardUserDefaults integerForKey:@"cannonId"];
+    cannonsOwned = [standardUserDefaults objectForKey:@"cannonsOwned"];
+    cannon_panels = [[NSMutableArray alloc] initWithCapacity:[cannon_titles count]];
+    
+    for (int i=0; i<[cannon_titles count]; i++) {
         CCScrollMenuItem *panelNode = [CCScrollMenuItem node];
         panelNode.contentSize = CGSizeMake(142,88);
         
@@ -173,17 +164,23 @@
         panel.radius = 5;
         panel.cornerSegments = 5;
         
+        CCLabelTTF *cannon_title_lbl = [CCLabelTTF labelWithString:[cannon_titles objectAtIndex:i] fontName:@"Papyrus" fontSize: 24];
+        cannon_title_lbl.color = ccc3(0, 0, 0);
+        cannon_title_lbl.position = ccp(0,0);
+        
         [panelNode addChild:panel];
+        [panelNode addChild:cannon_title_lbl];
         [cannon_panels addObject:panelNode];
     }
     cannonScrollMenu = [CCScrollMenu newScrollMenu:cannon_panels padding:20];
+    cannonScrollMenu.position = ccp(10,90);
     [cannonScrollMenu setOpacity:0];
     cannonScrollMenu.isTouchEnabled = NO;
     [self addChild:cannonScrollMenu];
     /* --------------------------  END CANNONS   ----------------------------------  */
     
     /* --------------------------  EXTRAS   ---------------------------------------  */
-    NSMutableArray *extra_panels = [NSMutableArray arrayWithCapacity:10];
+    extra_panels = [[NSMutableArray alloc] initWithCapacity:10];
     
     for (int i=0; i<10; i++) {
         CCScrollMenuItem *panelNode = [CCScrollMenuItem node];
@@ -201,6 +198,7 @@
         [extra_panels addObject:panelNode];
     }
     extraScrollMenu = [CCScrollMenu newScrollMenu:extra_panels padding:20];
+    extraScrollMenu.position = ccp(10,90);
     [extraScrollMenu setOpacity:0];
     extraScrollMenu.isTouchEnabled = NO;
     [self addChild:extraScrollMenu];
@@ -221,19 +219,65 @@
     gunScrollMenu.isTouchEnabled = YES;
 }
 
+- (BOOL) isGunOwned:(int)index
+{
+    NSNumber *result = [gunsOwned objectAtIndex:index];
+    int check = [result integerValue];
+    if (check == 1) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL) buyGun:(int)index
+{
+    if (![self isGunOwned:index]) {
+        NSLog(@"buying Gun");
+        
+        [gunsOwned replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:1]];
+        [standardUserDefaults setObject:gunsOwned forKey:@"gunsOwned"];
+        
+        return YES;
+    } else {
+        NSLog(@"Gun already bought");
+        return NO;
+    }
+}
+- (BOOL) equipGun:(int)index
+{
+    if ([self isGunOwned:index]) {
+        NSLog(@"equipping");
+        
+        ShopGunPanel *oldPanel = [gun_panels objectAtIndex:gunEquipped];
+        ShopGunPanel *newPanel = [gun_panels objectAtIndex:index];
+        
+        oldPanel.equipped_lbl.visible = NO;
+        newPanel.equipped_lbl.visible = YES;
+        
+        gunEquipped = index;
+        [standardUserDefaults setInteger:gunEquipped forKey:@"gunId"];
+        
+        return YES;
+    } else {
+        NSLog(@"gun not bought yet");
+        return NO;
+    }
+}
+
 - (void) openGunDetails:(int)index
 {
     [self disableTouchesForPopup];
     
     gunDetailsPopup = [CCNode node];
-    gunDetailsPopup.contentSize = CGSizeMake(350, 200);
+    gunDetailsPopup.contentSize = CGSizeMake(350, 175);
     gunDetailsPopup.position = ccp(screenSize.width/2, screenSize.height/2-20);
     gunDetailsPopup.scale = 0;
     [self addChild:gunDetailsPopup z:2];
     
     RoundedRectNode *popup_bg = [RoundedRectNode newRectWithSize:gunDetailsPopup.contentSize];
     popup_bg.borderWidth = 2.5;
-    popup_bg.position = ccp(-gunDetailsPopup.contentSize.width/2,gunDetailsPopup.contentSize.height/2);
+    popup_bg.position = ccp(-gunDetailsPopup.contentSize.width/2,gunDetailsPopup.contentSize.height/2+10);
     popup_bg.color = ccc4(235, 241, 199, 255);
     popup_bg.borderColor = ccc4(167, 172, 135, 255);
     popup_bg.radius = 5;
@@ -261,10 +305,46 @@
     gun_bg.cornerSegments = 5;
     [gunDetailsPopup addChild:gun_bg];
     
+    RoundedRectNode *gun_info_bg = [RoundedRectNode newRectWithSize:CGSizeMake(130, 60)];
+    gun_info_bg.borderWidth = 2.5;
+    gun_info_bg.position = ccp(15,40);
+    gun_info_bg.color = ccc4(249, 241, 190, 255);
+    gun_info_bg.borderColor = ccc4(169, 149, 61, 255);
+    gun_info_bg.radius = 5;
+    gun_info_bg.cornerSegments = 5;
+    [gunDetailsPopup addChild:gun_info_bg];
+    
     CCSprite *gun_sprite = [CCSprite spriteWithFile:[gun_file_names objectAtIndex:index]];
     gun_sprite.position = ccp(-80,-10);
     gun_sprite.scale = 1.5;
     [gunDetailsPopup addChild:gun_sprite];
+    
+    CCLabelTTF *gun_cost = [CCLabelTTF labelWithString:@"Cost: $0" fontName:@"Chalkduster" fontSize: 14];
+    CCLabelTTF *gun_power = [CCLabelTTF labelWithString:@"Power: 0" fontName:@"Chalkduster" fontSize: 14];
+    CCLabelTTF *gun_ammo = [CCLabelTTF labelWithString:@"Ammo: 0" fontName:@"Chalkduster" fontSize: 14];
+    gun_cost.position = ccp(60,28);
+    gun_power.position = ccp(gun_cost.position.x,gun_cost.position.y-18);
+    gun_ammo.position = ccp(gun_cost.position.x,gun_power.position.y-18);
+    gun_cost.color = ccDARKGOLDENROD;
+    gun_power.color = ccDARKGOLDENROD;
+    gun_ammo.color = ccDARKGOLDENROD;
+    [gunDetailsPopup addChild:gun_cost];
+    [gunDetailsPopup addChild:gun_power];
+    [gunDetailsPopup addChild:gun_ammo];
+    
+    [CCMenuItemFont setFontSize:24];
+    CCMenuItemFont *buy_btn_item = [CCMenuItemFont itemFromString:@"Buy" block:^(id sender) {
+        [self buyGun:index];
+    }];
+    CCMenuItemFont *equip_btn_item = [CCMenuItemFont itemFromString:@"Equip" block:^(id sender) {
+        [self equipGun:index];
+    }];
+    buy_btn_item.color = ccc3(0,0,0);
+    equip_btn_item.color = ccc3(0,0,0);
+    CCMenu *gun_options_menu = [CCMenu menuWithItems:buy_btn_item, equip_btn_item, nil];
+    gun_options_menu.position = ccp(80,-45);
+    [gun_options_menu alignItemsHorizontallyWithPadding:20];
+    [gunDetailsPopup addChild:gun_options_menu];
     
     switch (index) {
         case 0: // Revolver
@@ -391,6 +471,9 @@
 {
     [gun_titles release];
     [gun_file_names release];
+    [gun_panels release];
+    [cannon_panels release];
+    [extra_panels release];
 	[super dealloc];
 }
 

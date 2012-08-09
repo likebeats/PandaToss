@@ -20,5 +20,6 @@
 
 - (void)setInt:(int)val forKey:(NSString*)key;
 - (void)setString:(NSString*)val forKey:(NSString*)key;
+- (void)setObject:(id)obj forKey:(NSString*)key;
 
 @end

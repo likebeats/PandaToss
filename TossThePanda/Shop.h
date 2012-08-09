@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 #import "RoundedRectNode.h"
 #import "CCScrollMenu.h"
+#import "ShopGunPanel.h"
 
 @interface Shop : CCLayer {
     
@@ -18,6 +19,13 @@
     
     NSArray *gun_titles;
     NSArray *gun_file_names;
+    
+    NSMutableArray *gunsOwned;
+    NSMutableArray *cannonsOwned;
+    
+    NSMutableArray *gun_panels;
+    NSMutableArray *cannon_panels;
+    NSMutableArray *extra_panels;
     
     CCMenu *tab_menu;
     CCMenuItemImage *menu_item1;
@@ -37,6 +45,9 @@
     CCScrollMenu *extraScrollMenu;
     
     CCNode *gunDetailsPopup;
+    
+    int gunEquipped;
+    int cannonEquipped;
 }
 
 +(CCScene *) scene;
