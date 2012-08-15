@@ -48,11 +48,6 @@
     [logo setPosition:ccp(370, 250)];
     [self addChild:logo];
     
-    /*CCLabelTTF *title = [CCLabelTTF labelWithString:@"Main Menu" fontName:@"Chalkduster" fontSize: 26];
-    [title setPosition:ccp(screenSize.width/2,screenSize.height-40)];
-    [title setColor:ccc3(255,255,255)];
-    [self addChild:title];*/
-    
     [CCMenuItemFont setFontSize:20];
     CCMenuItemFont *btn1 = [CCMenuItemFont itemWithString: @"Toss the Panda!" target: self selector:@selector(startGame)];
     CCMenuItemFont *btn2 = [CCMenuItemFont itemWithString: @"Options" target: self selector:@selector(startGame)];

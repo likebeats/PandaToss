@@ -73,15 +73,15 @@ gunTitles;
                      [NSNumber numberWithInteger:0], nil];
         
         gunAmmos = [[NSArray alloc] initWithObjects:
-                    [NSNumber numberWithInteger:1],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0],
-                    [NSNumber numberWithInteger:0], nil];
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3],
+                    [NSNumber numberWithInteger:3], nil];
         
         gunTitles = [[NSArray alloc] initWithObjects:
                       @"Revolver",

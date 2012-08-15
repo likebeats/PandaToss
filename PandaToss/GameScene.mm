@@ -145,15 +145,15 @@
 - (void) createHUD
 {
     NSString *gunFileName = [globalVars.gunFileNames objectAtIndex:gunId];
-    CCSprite *ammo1 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"ammo_%@",gunFileName]];
-    CCSprite *ammo2 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"ammo_%@",gunFileName]];
-    CCSprite *ammo3 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"ammo_%@",gunFileName]];
-    ammo1.position = ccp(25,screenSize.height-60);
-    ammo2.position = ccp(25,ammo1.position.y-ammo1.contentSize.height);
-    ammo3.position = ccp(25,ammo2.position.y-ammo1.contentSize.height);
-    [self addChild:ammo1];
-    [self addChild:ammo2];
-    [self addChild:ammo3];
+    
+    int nextY = screenSize.height-60;
+    for (int i=0; i<gunAmmo; i++) {
+        CCSprite *ammo = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"ammo_%@",gunFileName]];
+        ammo.anchorPoint = ccp(0,0.5);
+        ammo.position = ccp(15,nextY);
+        nextY = ammo.position.y-ammo.contentSize.height;
+        [self addChild:ammo];
+    }
     
     [self createLabels];
 }
