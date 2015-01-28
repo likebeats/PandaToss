@@ -1706,6 +1706,7 @@
 				GCC_PREFIX_HEADER = PandaToss/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"PandaToss/libs/kazmath/include\"";
 				INFOPLIST_FILE = PandaToss/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -1726,6 +1727,7 @@
 				GCC_PREFIX_HEADER = PandaToss/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"PandaToss/libs/kazmath/include\"";
 				INFOPLIST_FILE = PandaToss/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
